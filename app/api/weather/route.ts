@@ -40,7 +40,8 @@ async function geolocateIp(ip: string) {
       lat: json.latitude,
       lon: json.longitude,
     };
-  } catch {
+  } catch (error) {
+    console.error("Weather geolocation error:", error);
     return DEFAULT_LOCATION;
   }
 }
@@ -109,7 +110,8 @@ export async function GET(request: Request) {
       category: current.category,
       forecast: days,
     };
-  } catch {
+  } catch (error) {
+    console.error("Weather forecast error:", error);
     data = {
       city: location.city,
       country: location.country,

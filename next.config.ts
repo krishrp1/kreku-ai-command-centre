@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Don't fingerprint the framework/version to clients.
+  poweredByHeader: false,
 };
 
 export default nextConfig;
