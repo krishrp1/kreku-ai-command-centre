@@ -19,9 +19,9 @@ const MAX_HISTORY = 20;
 
 /**
  * Per-IP sliding-window limiter — this route is billable, and the site has
- * no auth. Set below Google's free-tier quota (gemini-2.5-flash-lite: 15
- * req/min, 1000 req/day) so our own limiter degrades requests gracefully
- * before Google's quota wall does.
+ * no auth. Set below the lite tier's free-tier quota (15 req/min, 1000
+ * req/day at time of writing) so our own limiter degrades requests
+ * gracefully before Google's quota wall does.
  */
 const RATE_LIMIT = 4;
 const RATE_WINDOW_MS = 60_000;
@@ -93,7 +93,7 @@ export async function POST(request: Request) {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
     const stream = await ai.models.generateContentStream({
-      model: "gemini-2.5-flash-lite",
+      model: "gemini-flash-lite-latest",
       config: {
         systemInstruction: `${SYSTEM_PROMPT}\n\nLive telemetry snapshot:\n${telemetry}`,
         maxOutputTokens: 1024,
