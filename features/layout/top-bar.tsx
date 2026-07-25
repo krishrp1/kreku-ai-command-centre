@@ -71,7 +71,7 @@ export function TopBar() {
           playSound("click");
           setCommandPaletteOpen(true);
         }}
-        className="ml-auto flex h-8 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs text-muted-foreground transition-all hover:border-kreku/50 hover:text-foreground"
+        className="relative ml-auto flex h-8 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs text-muted-foreground transition-all before:absolute before:-inset-2 before:content-[''] hover:border-kreku/50 hover:text-foreground"
         aria-label="Open command palette"
       >
         <Search className="h-3.5 w-3.5" aria-hidden />
@@ -98,7 +98,7 @@ export function TopBar() {
           playSound("click");
           setNotificationsOpen(!notificationsOpen);
         }}
-        className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-muted-foreground transition-all hover:border-kreku/50 hover:text-foreground"
+        className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-muted-foreground transition-all before:absolute before:-inset-2 before:content-[''] hover:border-kreku/50 hover:text-foreground"
         aria-label={`Notifications, ${unread} unread`}
       >
         <Bell className="h-4 w-4" aria-hidden />

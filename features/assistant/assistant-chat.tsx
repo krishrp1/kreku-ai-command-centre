@@ -104,7 +104,7 @@ export function AssistantChat({ className }: { className?: string }) {
             placeholder={busy ? "KREKU is responding…" : "Ask KREKU anything…"}
             disabled={busy}
             aria-label="Message KREKU"
-            className="h-9 min-w-0 flex-1 rounded-lg border border-white/10 bg-white/5 px-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-kreku/60"
+            className="h-9 min-w-0 flex-1 rounded-lg border border-white/10 bg-white/5 px-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/80 focus:border-kreku/60"
           />
           <button
             type="submit"

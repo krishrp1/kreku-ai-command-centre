@@ -46,7 +46,7 @@ export function AssistantPanel() {
                   setOpen(false);
                 }}
                 aria-label="Collapse assistant"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="relative text-muted-foreground transition-colors before:absolute before:-inset-2 before:content-[''] hover:text-foreground"
               >
                 <X className="h-4 w-4" aria-hidden />
               </button>

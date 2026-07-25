@@ -62,7 +62,7 @@ export function NotificationCentre() {
               type="button"
               onClick={markAllRead}
               aria-label="Mark all as read"
-              className="ml-auto text-muted-foreground transition-colors hover:text-kreku"
+              className="relative ml-auto text-muted-foreground transition-colors before:absolute before:-inset-1 before:content-[''] hover:text-kreku"
             >
               <CheckCheck className="h-4 w-4" aria-hidden />
             </button>
@@ -73,7 +73,7 @@ export function NotificationCentre() {
                 clearNotifications();
               }}
               aria-label="Clear all notifications"
-              className="text-muted-foreground transition-colors hover:text-kreku-danger"
+              className="relative text-muted-foreground transition-colors before:absolute before:-inset-1 before:content-[''] hover:text-kreku-danger"
             >
               <Trash2 className="h-4 w-4" aria-hidden />
             </button>
@@ -81,7 +81,7 @@ export function NotificationCentre() {
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close notifications"
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              className="relative text-muted-foreground transition-colors before:absolute before:-inset-1 before:content-[''] hover:text-foreground"
             >
               <X className="h-4 w-4" aria-hidden />
             </button>

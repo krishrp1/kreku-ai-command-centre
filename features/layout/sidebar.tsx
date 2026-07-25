@@ -44,7 +44,7 @@ export function Sidebar() {
             onMouseEnter={() => playSound("hover")}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "group relative flex h-10 items-center gap-3 overflow-hidden rounded-lg px-2.5 text-muted-foreground transition-colors",
+              "group relative flex h-11 items-center gap-3 overflow-hidden rounded-lg px-2.5 text-muted-foreground transition-colors",
               "hover:bg-white/6 hover:text-foreground",
               active && "text-kreku",
             )}

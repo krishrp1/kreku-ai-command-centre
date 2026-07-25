@@ -140,7 +140,7 @@ export function CommandPalette() {
                 }}
                 placeholder="Type a command…"
                 aria-label="Search commands"
-                className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground/60"
+                className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground/80"
               />
               <kbd className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
                 ESC

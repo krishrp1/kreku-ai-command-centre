@@ -57,7 +57,7 @@ export const useSystemStore = create<SystemState>()(
       glassBlur: 18,
       commandPaletteOpen: false,
       notificationsOpen: false,
-      assistantOpen: true,
+      assistantOpen: false,
       notifications: [],
 
       completeBoot: () => set({ bootPhase: "online" }),

@@ -131,7 +131,7 @@ export function TerminalView() {
           aria-label="Terminal input"
           autoComplete="off"
           spellCheck={false}
-          className="min-w-0 flex-1 bg-transparent text-foreground caret-[var(--kreku-accent)] outline-none placeholder:text-muted-foreground/40"
+          className="min-w-0 flex-1 bg-transparent text-foreground caret-[var(--kreku-accent)] outline-none placeholder:text-muted-foreground/80"
         />
       </form>
     </GlassPanel>
