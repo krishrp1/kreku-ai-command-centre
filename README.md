@@ -23,7 +23,7 @@ Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS 4 �
 ## Run
 
 ```bash
-npm install --legacy-peer-deps
+npm install
 npm run dev
 ```
 
