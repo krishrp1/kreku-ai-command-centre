@@ -14,20 +14,29 @@ interface ChatMessage {
 }
 
 const MAX_MESSAGE_LENGTH = 4000;
+const MAX_TELEMETRY_LENGTH = 500;
 const MAX_HISTORY = 20;
 
 /**
  * Per-IP sliding-window limiter — this route is billable, and the site has
- * no auth. Set below Google's free-tier quota (observed: 5 req/min for this
- * model) so our own limiter degrades requests gracefully before Google's
- * quota wall does.
+ * no auth. Set below Google's free-tier quota (gemini-2.5-flash-lite: 15
+ * req/min, 1000 req/day) so our own limiter degrades requests gracefully
+ * before Google's quota wall does.
  */
 const RATE_LIMIT = 4;
 const RATE_WINDOW_MS = 60_000;
+const MAX_TRACKED_IPS = 5000;
 const requestLog = new Map<string, number[]>();
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
+  // Bound memory on a long-lived warm instance — sweep stale IPs once the
+  // map gets large instead of tracking every address that ever visited.
+  if (requestLog.size > MAX_TRACKED_IPS) {
+    for (const [key, entries] of requestLog) {
+      if (entries.every((t) => now - t >= RATE_WINDOW_MS)) requestLog.delete(key);
+    }
+  }
   const timestamps = (requestLog.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
   timestamps.push(now);
   requestLog.set(ip, timestamps);
@@ -67,21 +76,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "messages required" }, { status: 400 });
   }
 
-  const messages = payload.messages.filter(isValidMessage).map((m) => ({
-    role: m.role,
-    content: m.content.slice(0, MAX_MESSAGE_LENGTH),
-  }));
+  const messages = payload.messages
+    .filter(isValidMessage)
+    .map((m) => ({ role: m.role, content: m.content.slice(0, MAX_MESSAGE_LENGTH).trim() }))
+    .filter((m) => m.content.length > 0);
   if (messages.length === 0) {
     return NextResponse.json({ error: "no valid messages" }, { status: 400 });
   }
 
-  const telemetry = typeof payload.telemetry === "string" ? payload.telemetry : "unavailable";
+  const telemetry =
+    typeof payload.telemetry === "string"
+      ? payload.telemetry.slice(0, MAX_TELEMETRY_LENGTH)
+      : "unavailable";
 
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
     const stream = await ai.models.generateContentStream({
-      model: "gemini-flash-latest",
+      model: "gemini-2.5-flash-lite",
       config: {
         systemInstruction: `${SYSTEM_PROMPT}\n\nLive telemetry snapshot:\n${telemetry}`,
         maxOutputTokens: 1024,
