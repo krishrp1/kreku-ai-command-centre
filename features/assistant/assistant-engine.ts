@@ -5,8 +5,8 @@ import { useMetricsStore } from "@/store/metrics-store";
 import type { MetricsSample } from "@/types";
 
 /**
- * Reply pipeline: try the /api/chat route (real Claude API, streaming).
- * When the server has no API key (501) or the request fails, fall back to
+ * Reply pipeline: try the /api/chat route (Gemini API via Google AI Studio, streaming).
+ * When the server has no API key or the request fails, fall back to
  * the offline engine so the demo works without any configuration.
  */
 
@@ -129,7 +129,7 @@ const OFFLINE_RESPONDERS: Responder[] = [
     /thank|thanks|cheers/i.test(input) ? "Always. I'll be here — I don't really have anywhere else to be." : null,
   (input) =>
     /real|fake|simulated|demo/i.test(input)
-      ? "Candidly? The telemetry is simulated — this is a portfolio demonstration. My charm, however, is entirely genuine. Connect an ANTHROPIC_API_KEY and I get a real brain."
+      ? "Candidly? The telemetry is simulated — this is a portfolio demonstration. My charm, however, is entirely genuine. Connect a GEMINI_API_KEY and I get a real brain."
       : null,
 ];
 
@@ -144,7 +144,7 @@ function offlineReply(input: string): string {
   // Echo the topic back so unmatched inputs still feel heard.
   const topic = input.trim().replace(/[?.!]+$/, "");
   const preview = topic.length > 60 ? `${topic.slice(0, 57)}…` : topic;
-  return `I've logged "${preview}" but my offline reasoning module is limited — I can discuss system status, subsystems, satellites, security, or weather. For open conversation, the operator can connect an ANTHROPIC_API_KEY to bring my full intelligence online.`;
+  return `I've logged "${preview}" but my offline reasoning module is limited — I can discuss system status, subsystems, satellites, security, or weather. For open conversation, the operator can connect a GEMINI_API_KEY to bring my full intelligence online.`;
 }
 
 function streamOffline(id: string) {
