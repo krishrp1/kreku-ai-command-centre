@@ -60,3 +60,18 @@ export interface TerminalLine {
   kind: "input" | "output" | "system";
   text: string;
 }
+
+export interface WeatherForecastDay {
+  day: string;
+  high: number;
+  category: import("@/lib/weather-codes").WeatherCategory;
+}
+
+export interface WeatherData {
+  city: string;
+  country: string;
+  tempC: number;
+  condition: string;
+  category: import("@/lib/weather-codes").WeatherCategory;
+  forecast: WeatherForecastDay[];
+}

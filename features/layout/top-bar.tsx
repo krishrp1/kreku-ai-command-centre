@@ -11,6 +11,7 @@ import {
 import { APP_NAME } from "@/lib/constants";
 import { useClock } from "@/hooks/use-clock";
 import { useSound } from "@/hooks/use-sound";
+import { useWeather } from "@/hooks/use-weather";
 import { useLatestMetrics } from "@/store/metrics-store";
 import { useSystemStore } from "@/store/system-store";
 import { useAssistantStore } from "@/store/assistant-store";
@@ -32,6 +33,7 @@ const dateFormat = new Intl.DateTimeFormat("en-GB", {
 export function TopBar() {
   const now = useClock();
   const metrics = useLatestMetrics();
+  const { data: weather } = useWeather();
   const playSound = useSound();
   const assistantStatus = useAssistantStore((s) => s.status);
   const notifications = useSystemStore((s) => s.notifications);
@@ -83,7 +85,9 @@ export function TopBar() {
 
       <div className="hidden items-center gap-1.5 text-muted-foreground md:flex">
         <Cloud className="h-4 w-4" aria-hidden />
-        <span className="font-mono text-xs">18°C</span>
+        <span className={cn("font-mono text-xs", !weather && "opacity-0")}>
+          {weather ? `${weather.tempC}°C` : "--°C"}
+        </span>
       </div>
 
       <div className="hidden items-center gap-1.5 text-muted-foreground sm:flex">
