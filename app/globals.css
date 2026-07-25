@@ -1,26 +1,320 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-display);
+  --font-display: var(--font-display);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* NEXUS accent system — resolved from the active accent (see [data-accent]) */
+  --color-nexus: var(--nexus-accent);
+  --color-nexus-soft: var(--nexus-accent-soft);
+  --color-nexus-cyan: #00e5ff;
+  --color-nexus-blue: #3b82f6;
+  --color-nexus-purple: #8b5cf6;
+  --color-nexus-teal: #14b8a6;
+  --color-nexus-danger: #ff3b30;
+  --color-nexus-warning: #f59e0b;
+  --color-nexus-success: #22c55e;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Deep-space dark is the only base theme; accent hue is user-switchable */
+  --background: #05060a;
+  --foreground: #ffffff;
+  --card: rgba(15, 20, 30, 0.45);
+  --card-foreground: #ffffff;
+  --popover: rgba(10, 14, 22, 0.92);
+  --popover-foreground: #ffffff;
+  --primary: var(--nexus-accent);
+  --primary-foreground: #04070c;
+  --secondary: rgba(255, 255, 255, 0.06);
+  --secondary-foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.05);
+  --muted-foreground: rgba(255, 255, 255, 0.65);
+  --accent: rgba(255, 255, 255, 0.08);
+  --accent-foreground: #ffffff;
+  --destructive: #ff3b30;
+  --border: rgba(255, 255, 255, 0.09);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: var(--nexus-accent);
+  --chart-1: #00e5ff;
+  --chart-2: #3b82f6;
+  --chart-3: #8b5cf6;
+  --chart-4: #14b8a6;
+  --chart-5: #f59e0b;
+  --radius: 0.75rem;
+  --sidebar: rgba(10, 14, 22, 0.6);
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: var(--nexus-accent);
+  --sidebar-primary-foreground: #04070c;
+  --sidebar-accent: rgba(255, 255, 255, 0.08);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.09);
+  --sidebar-ring: var(--nexus-accent);
+
+  --nexus-accent: #00e5ff;
+  --nexus-accent-soft: rgba(0, 229, 255, 0.14);
+  --nexus-glass-blur: 18px;
+  --nexus-glow: 0 0 24px;
+}
+
+[data-accent="blue"] {
+  --nexus-accent: #3b82f6;
+  --nexus-accent-soft: rgba(59, 130, 246, 0.14);
+}
+[data-accent="purple"] {
+  --nexus-accent: #8b5cf6;
+  --nexus-accent-soft: rgba(139, 92, 246, 0.14);
+}
+[data-accent="teal"] {
+  --nexus-accent: #14b8a6;
+  --nexus-accent-soft: rgba(20, 184, 166, 0.14);
+}
+
+[data-contrast="high"] {
+  --card: rgba(8, 12, 20, 0.92);
+  --popover: rgba(6, 9, 16, 0.98);
+  --muted-foreground: rgba(255, 255, 255, 0.85);
+  --border: rgba(255, 255, 255, 0.35);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground overflow-hidden;
+  }
+  ::selection {
+    background: var(--nexus-accent-soft);
+    color: #fff;
+  }
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--nexus-accent);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Frosted holographic surface used by every panel */
+  .glass {
+    background: var(--card);
+    backdrop-filter: blur(var(--nexus-glass-blur)) saturate(1.4);
+    -webkit-backdrop-filter: blur(var(--nexus-glass-blur)) saturate(1.4);
+    border: 1px solid var(--border);
+  }
+  .glass-strong {
+    background: var(--popover);
+    backdrop-filter: blur(calc(var(--nexus-glass-blur) * 1.4)) saturate(1.5);
+    -webkit-backdrop-filter: blur(calc(var(--nexus-glass-blur) * 1.4)) saturate(1.5);
+    border: 1px solid var(--border);
+  }
+  .glow-accent {
+    box-shadow: var(--nexus-glow) color-mix(in srgb, var(--nexus-accent) 35%, transparent);
+  }
+  .text-glow {
+    text-shadow: 0 0 12px color-mix(in srgb, var(--nexus-accent) 60%, transparent);
+  }
+  .holo-border {
+    position: relative;
+  }
+  .holo-border::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      130deg,
+      color-mix(in srgb, var(--nexus-accent) 55%, transparent),
+      transparent 30%,
+      transparent 70%,
+      color-mix(in srgb, var(--nexus-accent) 35%, transparent)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .scanlines::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0 2px,
+      rgba(255, 255, 255, 0.015) 2px 4px
+    );
+    pointer-events: none;
+  }
+}
+
+@keyframes nexus-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+@keyframes nexus-spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes nexus-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes nexus-shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.animate-nexus-pulse {
+  animation: nexus-pulse 2.4s ease-in-out infinite;
+}
+.animate-nexus-spin-slow {
+  animation: nexus-spin-slow 24s linear infinite;
+}
+.animate-nexus-float {
+  animation: nexus-float 5s ease-in-out infinite;
+}
+.animate-nexus-shimmer {
+  animation: nexus-shimmer 2.2s linear infinite;
+}
+
+/* react-grid-layout structural styles (library ships no CSS in v2) */
+.react-grid-layout {
+  position: relative;
+  transition: height 200ms ease;
+}
+.react-grid-item {
+  transition: all 200ms ease;
+  transition-property: left, top, width, height;
+}
+.react-grid-item.resizing,
+.react-grid-item.react-draggable-dragging {
+  transition: none;
+  z-index: 30;
+  will-change: transform;
+}
+.react-grid-item.react-draggable-dragging .glass {
+  box-shadow: 0 0 32px color-mix(in srgb, var(--nexus-accent) 30%, transparent);
+}
+.react-grid-item.react-grid-placeholder {
+  background: var(--nexus-accent-soft);
+  border: 1px dashed color-mix(in srgb, var(--nexus-accent) 50%, transparent);
+  border-radius: var(--radius-xl);
+  opacity: 0.6;
+  transition-duration: 100ms;
+  z-index: 2;
+  user-select: none;
+}
+.react-grid-item > .react-resizable-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+  z-index: 20;
+}
+.react-grid-item > .react-resizable-handle::after {
+  content: "";
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+  border-bottom-right-radius: 3px;
+}
+
+/* Motion is opt-out: both the OS preference and the in-app toggle kill it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+[data-motion="reduced"] *,
+[data-motion="reduced"] *::before,
+[data-motion="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
 }
