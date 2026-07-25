@@ -154,6 +154,16 @@
   *::-webkit-scrollbar-thumb:hover {
     background: var(--kreku-accent);
   }
+  /*
+   * Default positioning context for .holo-border's ::after overlay. Lives in
+   * this lower-priority layer (rather than @layer utilities, where the rule
+   * itself is defined) so a real Tailwind position utility like `fixed` on
+   * the same element always wins the cascade instead of losing to this by
+   * source order.
+   */
+  .holo-border {
+    position: relative;
+  }
 }
 
 @layer utilities {
@@ -175,9 +185,6 @@
   }
   .text-glow {
     text-shadow: 0 0 12px color-mix(in srgb, var(--kreku-accent) 60%, transparent);
-  }
-  .holo-border {
-    position: relative;
   }
   .holo-border::after {
     content: "";
