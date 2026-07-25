@@ -21,7 +21,7 @@ export const useAssistantStore = create<AssistantState>((set) => ({
       id: "welcome",
       role: "assistant",
       content:
-        "All systems nominal. I am NEXUS, your command centre intelligence. How can I assist?",
+        "All systems nominal. I am KREKU, your command centre intelligence. How can I assist?",
       timestamp: Date.now(),
     },
   ],

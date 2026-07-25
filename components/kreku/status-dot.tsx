@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 
 const TONES = {
-  success: "bg-nexus-success",
-  warning: "bg-nexus-warning",
-  danger: "bg-nexus-danger",
-  accent: "bg-nexus",
+  success: "bg-kreku-success",
+  warning: "bg-kreku-warning",
+  danger: "bg-kreku-danger",
+  accent: "bg-kreku",
 } as const;
 
 export function StatusDot({

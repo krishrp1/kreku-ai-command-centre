@@ -15,7 +15,7 @@ export function WeatherWidget() {
     <WidgetShell title="Weather — London">
       <div className="flex h-full items-center gap-4">
         <div className="flex items-center gap-3">
-          <Cloud className="h-9 w-9 text-nexus" aria-hidden />
+          <Cloud className="h-9 w-9 text-kreku" aria-hidden />
           <div className="leading-tight">
             <p className="font-display text-2xl tabular-nums">18°C</p>
             <p className="font-mono text-[10px] text-muted-foreground">Partly cloudy</p>

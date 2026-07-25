@@ -120,7 +120,7 @@ function LayeredBackgroundImpl() {
     const onMove = (event: PointerEvent) => {
       const light = lightRef.current;
       if (!light) return;
-      light.style.background = `radial-gradient(600px circle at ${event.clientX}px ${event.clientY}px, var(--nexus-accent-soft), transparent 70%)`;
+      light.style.background = `radial-gradient(600px circle at ${event.clientX}px ${event.clientY}px, var(--kreku-accent-soft), transparent 70%)`;
     };
     window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
@@ -129,9 +129,9 @@ function LayeredBackgroundImpl() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
       {/* L4: nebula glows */}
-      <div className="absolute -left-40 top-[-20%] h-[60vh] w-[60vh] rounded-full bg-nexus-purple/12 blur-[120px]" />
-      <div className="absolute -right-32 bottom-[-15%] h-[55vh] w-[55vh] rounded-full bg-nexus-cyan/10 blur-[120px]" />
-      <div className="absolute left-1/3 top-1/2 h-[40vh] w-[40vh] rounded-full bg-nexus-blue/8 blur-[100px]" />
+      <div className="absolute -left-40 top-[-20%] h-[60vh] w-[60vh] rounded-full bg-kreku-purple/12 blur-[120px]" />
+      <div className="absolute -right-32 bottom-[-15%] h-[55vh] w-[55vh] rounded-full bg-kreku-cyan/10 blur-[120px]" />
+      <div className="absolute left-1/3 top-1/2 h-[40vh] w-[40vh] rounded-full bg-kreku-blue/8 blur-[100px]" />
       {/* L3: grid lines */}
       <div
         className="absolute inset-0 opacity-[0.35]"
@@ -147,9 +147,9 @@ function LayeredBackgroundImpl() {
       <canvas ref={canvasRef} className="absolute inset-0" />
       {/* L5: slow rotating rings */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="animate-nexus-spin-slow h-[85vmin] w-[85vmin] rounded-full border border-white/4" />
+        <div className="animate-kreku-spin-slow h-[85vmin] w-[85vmin] rounded-full border border-white/4" />
         <div
-          className="animate-nexus-spin-slow absolute left-1/2 top-1/2 h-[60vmin] w-[60vmin] -translate-x-1/2 -translate-y-1/2 rounded-full border border-nexus/6"
+          className="animate-kreku-spin-slow absolute left-1/2 top-1/2 h-[60vmin] w-[60vmin] -translate-x-1/2 -translate-y-1/2 rounded-full border border-kreku/6"
           style={{ animationDirection: "reverse", animationDuration: "36s" }}
         />
       </div>

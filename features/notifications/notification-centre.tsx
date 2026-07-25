@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { BellOff, CheckCheck, Trash2, X } from "lucide-react";
 import { useEffect } from "react";
-import { StatusDot } from "@/components/nexus/status-dot";
+import { StatusDot } from "@/components/kreku/status-dot";
 import { useSound } from "@/hooks/use-sound";
 import { useSystemStore } from "@/store/system-store";
 import { formatClock } from "@/utils/format";
@@ -62,7 +62,7 @@ export function NotificationCentre() {
               type="button"
               onClick={markAllRead}
               aria-label="Mark all as read"
-              className="ml-auto text-muted-foreground transition-colors hover:text-nexus"
+              className="ml-auto text-muted-foreground transition-colors hover:text-kreku"
             >
               <CheckCheck className="h-4 w-4" aria-hidden />
             </button>
@@ -73,7 +73,7 @@ export function NotificationCentre() {
                 clearNotifications();
               }}
               aria-label="Clear all notifications"
-              className="text-muted-foreground transition-colors hover:text-nexus-danger"
+              className="text-muted-foreground transition-colors hover:text-kreku-danger"
             >
               <Trash2 className="h-4 w-4" aria-hidden />
             </button>

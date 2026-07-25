@@ -10,7 +10,7 @@ export type ViewId =
   | "settings"
   | "profile";
 
-export type AccentId = "cyan" | "blue" | "purple" | "teal";
+export type AccentId = "cyan" | "blue" | "purple" | "teal" | "red";
 
 export type BootPhase = "booting" | "online";
 

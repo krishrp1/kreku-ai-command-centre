@@ -1,7 +1,7 @@
 "use client";
 
 import { ShieldCheck, ShieldAlert, Lock, Radio, Fingerprint } from "lucide-react";
-import { StatusDot } from "@/components/nexus/status-dot";
+import { StatusDot } from "@/components/kreku/status-dot";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
 
 const CHECKS = [
@@ -20,7 +20,7 @@ export function SecurityWidget() {
           const Icon = check.icon;
           return (
             <li key={check.label} className="flex items-center gap-3">
-              <Icon className="h-4 w-4 shrink-0 text-nexus" aria-hidden />
+              <Icon className="h-4 w-4 shrink-0 text-kreku" aria-hidden />
               <div className="min-w-0 flex-1 leading-tight">
                 <p className="text-xs text-foreground">{check.label}</p>
                 <p className="truncate font-mono text-[10px] text-muted-foreground">

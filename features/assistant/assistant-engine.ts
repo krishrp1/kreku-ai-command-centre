@@ -20,12 +20,12 @@ const RESPONSES: { pattern: RegExp; reply: string }[] = [
   },
   {
     pattern: /hello|hi|hey/i,
-    reply: "Hello. NEXUS core online and listening. What would you like me to do?",
+    reply: "Hello. KREKU core online and listening. What would you like me to do?",
   },
   {
     pattern: /who are you|your name/i,
     reply:
-      "I am NEXUS — the command centre's resident intelligence. I monitor telemetry, coordinate subsystems, and occasionally judge your taste in music.",
+      "I am KREKU — the command centre's resident intelligence. I monitor telemetry, coordinate subsystems, and occasionally judge your taste in music.",
   },
 ];
 

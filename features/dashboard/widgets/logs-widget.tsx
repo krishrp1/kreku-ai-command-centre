@@ -21,7 +21,7 @@ export function LogsWidget() {
             animate={{ opacity: 1, x: 0 }}
             className="flex gap-2"
           >
-            <span className="shrink-0 text-nexus/60">{formatClock(event.timestamp)}</span>
+            <span className="shrink-0 text-kreku/60">{formatClock(event.timestamp)}</span>
             <span className="text-foreground">{event.label}</span>
             <span className="truncate text-muted-foreground">{event.detail}</span>
           </motion.li>

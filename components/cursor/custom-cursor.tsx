@@ -40,11 +40,11 @@ export function CustomCursor() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-[100]">
       <motion.div
-        className="absolute h-1.5 w-1.5 rounded-full bg-nexus"
+        className="absolute h-1.5 w-1.5 rounded-full bg-kreku"
         style={{ x, y, translateX: "-50%", translateY: "-50%", opacity: visible ? 1 : 0 }}
       />
       <motion.div
-        className="absolute h-7 w-7 rounded-full border border-nexus/40"
+        className="absolute h-7 w-7 rounded-full border border-kreku/40"
         style={{
           x: ringX,
           y: ringY,

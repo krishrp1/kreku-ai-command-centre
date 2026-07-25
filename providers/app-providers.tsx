@@ -17,7 +17,7 @@ function SettingsEffects() {
     root.dataset.accent = accent;
     root.dataset.motion = reducedMotion ? "reduced" : "full";
     root.dataset.contrast = highContrast ? "high" : "normal";
-    root.style.setProperty("--nexus-glass-blur", `${glassBlur}px`);
+    root.style.setProperty("--kreku-glass-blur", `${glassBlur}px`);
   }, [accent, reducedMotion, highContrast, glassBlur]);
 
   return null;

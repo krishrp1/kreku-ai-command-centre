@@ -62,13 +62,13 @@ function DockIcon({
           aria-current={active ? "page" : undefined}
           className={cn(
             "glass relative flex items-center justify-center rounded-xl text-muted-foreground transition-colors",
-            "hover:text-nexus hover:glow-accent",
-            active && "text-nexus",
+            "hover:text-kreku hover:glow-accent",
+            active && "text-kreku",
           )}
         >
           <Icon className="h-1/2 w-1/2" aria-hidden />
           {active && (
-            <span className="absolute -bottom-1.5 h-1 w-1 rounded-full bg-nexus" />
+            <span className="absolute -bottom-1.5 h-1 w-1 rounded-full bg-kreku" />
           )}
         </motion.button>
       </TooltipTrigger>

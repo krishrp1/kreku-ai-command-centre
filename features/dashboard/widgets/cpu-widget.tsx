@@ -13,9 +13,9 @@ import {
   AreaGradient,
   CHART_AXIS_PROPS,
   CHART_GRID_PROPS,
-  NexusTooltip,
+  KrekuTooltip,
 } from "@/components/charts/chart-theme";
-import { CountUp } from "@/components/nexus/count-up";
+import { CountUp } from "@/components/kreku/count-up";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
 import { CHART_COLORS } from "@/lib/constants";
 import { useMetricsStore } from "@/store/metrics-store";
@@ -36,7 +36,7 @@ export function CpuWidget() {
         <CountUp
           value={current}
           format={formatPercent}
-          className="font-display text-lg text-nexus text-glow tabular-nums"
+          className="font-display text-lg text-kreku text-glow tabular-nums"
         />
       }
     >
@@ -46,7 +46,7 @@ export function CpuWidget() {
           <CartesianGrid {...CHART_GRID_PROPS} />
           <XAxis dataKey="time" {...CHART_AXIS_PROPS} interval="preserveStartEnd" minTickGap={48} />
           <YAxis domain={[0, 100]} {...CHART_AXIS_PROPS} />
-          <Tooltip content={NexusTooltip} cursor={{ stroke: "rgba(255,255,255,0.2)" }} />
+          <Tooltip content={KrekuTooltip} cursor={{ stroke: "rgba(255,255,255,0.2)" }} />
           <Area
             type="monotone"
             dataKey="cpu"

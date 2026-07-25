@@ -76,21 +76,21 @@ export function BootSequence() {
       {/* Power core */}
       <div className="relative flex items-center justify-center">
         <motion.div
-          className="absolute h-52 w-52 rounded-full bg-nexus/10 blur-2xl"
+          className="absolute h-52 w-52 rounded-full bg-kreku/10 blur-2xl"
           animate={{ scale: [1, 1.25, 1], opacity: [0.4, 0.9, 0.4] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="h-36 w-36 rounded-full border border-nexus/40"
+          className="h-36 w-36 rounded-full border border-kreku/40"
           animate={{ rotate: 360 }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
           style={{
             background:
-              "conic-gradient(from 0deg, transparent 0deg, var(--nexus-accent-soft) 90deg, transparent 180deg)",
+              "conic-gradient(from 0deg, transparent 0deg, var(--kreku-accent-soft) 90deg, transparent 180deg)",
           }}
         />
         <motion.div
-          className="absolute h-20 w-20 rounded-full bg-nexus/25 glow-accent"
+          className="absolute h-20 w-20 rounded-full bg-kreku/25 glow-accent"
           animate={{ scale: [0.9, 1.08, 0.9] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -110,13 +110,13 @@ export function BootSequence() {
           aria-label="Boot progress"
         >
           <motion.div
-            className="h-full rounded-full bg-nexus glow-accent"
+            className="h-full rounded-full bg-kreku glow-accent"
             style={{ width: `${progress}%` }}
           />
         </div>
         <div className="flex w-full items-center justify-between font-mono text-xs text-muted-foreground">
           <span>{APP_TAGLINE.toUpperCase()}</span>
-          <span className="text-nexus">{progress}%</span>
+          <span className="text-kreku">{progress}%</span>
         </div>
       </div>
 
@@ -133,9 +133,9 @@ export function BootSequence() {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center gap-2 text-muted-foreground"
             >
-              <span className="text-nexus-success">▸</span>
+              <span className="text-kreku-success">▸</span>
               <span>{step.text}</span>
-              <span className="ml-auto text-nexus-success/80">OK</span>
+              <span className="ml-auto text-kreku-success/80">OK</span>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -144,7 +144,7 @@ export function BootSequence() {
       <button
         type="button"
         onClick={completeBoot}
-        className="absolute bottom-8 rounded-full border border-white/10 px-4 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-nexus/50 hover:text-nexus"
+        className="absolute bottom-8 rounded-full border border-white/10 px-4 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-kreku/50 hover:text-kreku"
       >
         SKIP BOOT — ESC
       </button>

@@ -46,13 +46,13 @@ export function Sidebar() {
             className={cn(
               "group relative flex h-10 items-center gap-3 overflow-hidden rounded-lg px-2.5 text-muted-foreground transition-colors",
               "hover:bg-white/6 hover:text-foreground",
-              active && "text-nexus",
+              active && "text-kreku",
             )}
           >
             {active && (
               <motion.span
                 layoutId="sidebar-active"
-                className="absolute inset-0 rounded-lg bg-nexus/10 shadow-[inset_2px_0_0_var(--nexus-accent)]"
+                className="absolute inset-0 rounded-lg bg-kreku/10 shadow-[inset_2px_0_0_var(--kreku-accent)]"
                 transition={{ type: "spring", stiffness: 400, damping: 32 }}
               />
             )}

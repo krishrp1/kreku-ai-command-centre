@@ -24,7 +24,7 @@ export function VoiceWaveform({
       {Array.from({ length: BAR_COUNT }, (_, i) => (
         <motion.span
           key={i}
-          className="w-0.5 flex-1 rounded-full bg-nexus/80"
+          className="w-0.5 flex-1 rounded-full bg-kreku/80"
           animate={
             active
               ? { height: ["18%", `${20 + ((i * 41) % intensity)}%`, "18%"] }

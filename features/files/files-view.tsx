@@ -8,7 +8,7 @@ import {
   FileText,
   Folder,
 } from "lucide-react";
-import { GlassPanel } from "@/components/nexus/glass-panel";
+import { GlassPanel } from "@/components/kreku/glass-panel";
 
 const FILES = [
   { name: "mission-archives", kind: "folder", size: "—", icon: Folder },
@@ -35,7 +35,7 @@ export function FilesView() {
           >
             <div className="flex items-center gap-3">
               <Icon
-                className="h-8 w-8 text-nexus transition-transform group-hover:scale-110"
+                className="h-8 w-8 text-kreku transition-transform group-hover:scale-110"
                 aria-hidden
               />
               <div className="min-w-0">

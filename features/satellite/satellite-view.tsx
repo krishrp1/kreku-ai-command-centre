@@ -5,8 +5,8 @@ import { Line, Sparkles } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
-import { GlassPanel } from "@/components/nexus/glass-panel";
-import { StatusDot } from "@/components/nexus/status-dot";
+import { GlassPanel } from "@/components/kreku/glass-panel";
+import { StatusDot } from "@/components/kreku/status-dot";
 import { useMotionSafe } from "@/hooks/use-motion-safe";
 
 const ACCENT = new THREE.Color("#00e5ff");
@@ -125,7 +125,7 @@ export function SatelliteView() {
             </div>
             <p className="mt-1 font-mono text-xs text-muted-foreground">{satellite.orbit}</p>
             <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/10">
-              <div className="animate-nexus-shimmer h-full w-full rounded-full bg-gradient-to-r from-transparent via-nexus to-transparent bg-[length:200%_100%]" />
+              <div className="animate-kreku-shimmer h-full w-full rounded-full bg-gradient-to-r from-transparent via-kreku to-transparent bg-[length:200%_100%]" />
             </div>
           </GlassPanel>
         ))}

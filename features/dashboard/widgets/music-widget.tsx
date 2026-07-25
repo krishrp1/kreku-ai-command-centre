@@ -28,7 +28,7 @@ export function MusicWidget() {
           {BARS.map((bar) => (
             <motion.span
               key={bar}
-              className="w-1 flex-1 rounded-full bg-nexus/70"
+              className="w-1 flex-1 rounded-full bg-kreku/70"
               animate={
                 animateBars
                   ? { height: ["20%", `${30 + ((bar * 37) % 60)}%`, "20%"] }
@@ -46,7 +46,7 @@ export function MusicWidget() {
         <div className="flex items-center justify-center gap-4">
           <button
             type="button"
-            className="text-muted-foreground transition-colors hover:text-nexus"
+            className="text-muted-foreground transition-colors hover:text-kreku"
             aria-label="Previous track"
             onClick={() => playSound("click")}
           >
@@ -58,14 +58,14 @@ export function MusicWidget() {
               playSound("click");
               setPlaying((p) => !p);
             }}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-nexus/40 bg-nexus/10 text-nexus transition-all hover:glow-accent"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-kreku/40 bg-kreku/10 text-kreku transition-all hover:glow-accent"
             aria-label={playing ? "Pause" : "Play"}
           >
             {playing ? <Pause className="h-4 w-4" aria-hidden /> : <Play className="h-4 w-4" aria-hidden />}
           </button>
           <button
             type="button"
-            className="text-muted-foreground transition-colors hover:text-nexus"
+            className="text-muted-foreground transition-colors hover:text-kreku"
             aria-label="Next track"
             onClick={() => playSound("click")}
           >

@@ -119,7 +119,7 @@ export function CommandPalette() {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
-              <Search className="h-4 w-4 text-nexus" aria-hidden />
+              <Search className="h-4 w-4 text-kreku" aria-hidden />
               <input
                 ref={inputRef}
                 value={query}
@@ -161,7 +161,7 @@ export function CommandPalette() {
                     className={cn(
                       "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors",
                       index === selected
-                        ? "bg-nexus/12 text-nexus"
+                        ? "bg-kreku/12 text-kreku"
                         : "text-foreground hover:bg-white/5",
                     )}
                   >
@@ -170,7 +170,7 @@ export function CommandPalette() {
                       {command.hint}
                     </span>
                     {index === selected && (
-                      <CornerDownLeft className="h-3.5 w-3.5 text-nexus" aria-hidden />
+                      <CornerDownLeft className="h-3.5 w-3.5 text-kreku" aria-hidden />
                     )}
                   </button>
                 </li>

@@ -13,7 +13,7 @@ import {
 import {
   CHART_AXIS_PROPS,
   CHART_GRID_PROPS,
-  NexusTooltip,
+  KrekuTooltip,
 } from "@/components/charts/chart-theme";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
 import { CHART_COLORS } from "@/lib/constants";
@@ -35,7 +35,7 @@ export function NetworkWidget() {
           <CartesianGrid {...CHART_GRID_PROPS} />
           <XAxis dataKey="time" {...CHART_AXIS_PROPS} interval="preserveStartEnd" minTickGap={48} />
           <YAxis {...CHART_AXIS_PROPS} />
-          <Tooltip content={NexusTooltip} cursor={{ stroke: "rgba(255,255,255,0.2)" }} />
+          <Tooltip content={KrekuTooltip} cursor={{ stroke: "rgba(255,255,255,0.2)" }} />
           <Legend
             wrapperStyle={{ fontSize: 10, fontFamily: "var(--font-mono)" }}
             iconType="plainline"

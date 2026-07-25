@@ -8,9 +8,9 @@ export function CoreWidget() {
   const status = useAssistantStore((s) => s.status);
   return (
     <WidgetShell
-      title="Nexus Core"
+      title="Kreku Core"
       action={
-        <span className="font-mono text-[10px] uppercase text-nexus">{status}</span>
+        <span className="font-mono text-[10px] uppercase text-kreku">{status}</span>
       }
     >
       <AiCore className="h-full w-full" bloom={false} />

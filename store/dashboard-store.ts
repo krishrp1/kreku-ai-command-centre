@@ -48,6 +48,6 @@ export const useDashboardStore = create<DashboardState>()(
       setLayout: (layout) => set({ layout }),
       resetLayout: () => set({ layout: DEFAULT_LAYOUT }),
     }),
-    { name: "nexus-dashboard" },
+    { name: "kreku-dashboard" },
   ),
 );

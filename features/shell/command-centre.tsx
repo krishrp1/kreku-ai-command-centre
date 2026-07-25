@@ -58,7 +58,7 @@ export function CommandCentre() {
           >
             <a
               href="#main-content"
-              className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-nexus focus:px-3 focus:py-2 focus:text-sm focus:text-black"
+              className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-kreku focus:px-3 focus:py-2 focus:text-sm focus:text-black"
             >
               Skip to content
             </a>

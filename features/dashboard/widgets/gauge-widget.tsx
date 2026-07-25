@@ -1,7 +1,7 @@
 "use client";
 
 import { PolarAngleAxis, RadialBar, RadialBarChart, ResponsiveContainer } from "recharts";
-import { CountUp } from "@/components/nexus/count-up";
+import { CountUp } from "@/components/kreku/count-up";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
 import { useLatestMetrics } from "@/store/metrics-store";
 import type { MetricsSample } from "@/types";

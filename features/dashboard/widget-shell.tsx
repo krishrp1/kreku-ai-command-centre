@@ -1,7 +1,7 @@
 "use client";
 
 import { GripVertical } from "lucide-react";
-import { GlassPanel } from "@/components/nexus/glass-panel";
+import { GlassPanel } from "@/components/kreku/glass-panel";
 import { cn } from "@/lib/utils";
 
 interface WidgetShellProps {
@@ -21,7 +21,7 @@ export function WidgetShell({ title, children, className, action }: WidgetShellP
     >
       <div className="mb-2 flex items-center gap-2">
         <GripVertical
-          className="widget-drag-handle h-3.5 w-3.5 cursor-grab text-muted-foreground/60 hover:text-nexus"
+          className="widget-drag-handle h-3.5 w-3.5 cursor-grab text-muted-foreground/60 hover:text-kreku"
           aria-label={`Drag ${title} widget`}
         />
         <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">

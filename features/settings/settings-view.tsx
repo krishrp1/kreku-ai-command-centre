@@ -1,6 +1,6 @@
 "use client";
 
-import { GlassPanel } from "@/components/nexus/glass-panel";
+import { GlassPanel } from "@/components/kreku/glass-panel";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { ACCENTS } from "@/lib/constants";

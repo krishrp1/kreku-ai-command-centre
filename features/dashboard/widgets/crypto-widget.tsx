@@ -9,7 +9,7 @@ import {
   Tooltip,
   YAxis,
 } from "recharts";
-import { NexusTooltip } from "@/components/charts/chart-theme";
+import { KrekuTooltip } from "@/components/charts/chart-theme";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
 import { CHART_COLORS } from "@/lib/constants";
 import { METRICS_INTERVAL_MS } from "@/lib/constants";
@@ -70,7 +70,7 @@ export function CryptoWidget() {
                 <span
                   className={cn(
                     "ml-auto flex items-center gap-0.5 font-mono text-[10px] tabular-nums",
-                    up ? "text-nexus-success" : "text-nexus-danger",
+                    up ? "text-kreku-success" : "text-kreku-danger",
                   )}
                 >
                   {up ? <TrendingUp className="h-3 w-3" aria-hidden /> : <TrendingDown className="h-3 w-3" aria-hidden />}
@@ -81,7 +81,7 @@ export function CryptoWidget() {
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={asset.history}>
                     <YAxis domain={["dataMin", "dataMax"]} hide />
-                    <Tooltip content={NexusTooltip} cursor={{ stroke: "rgba(255,255,255,0.2)" }} />
+                    <Tooltip content={KrekuTooltip} cursor={{ stroke: "rgba(255,255,255,0.2)" }} />
                     <Line
                       type="monotone"
                       dataKey="value"

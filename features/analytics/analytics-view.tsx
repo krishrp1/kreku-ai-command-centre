@@ -22,9 +22,9 @@ import {
   AreaGradient,
   CHART_AXIS_PROPS,
   CHART_GRID_PROPS,
-  NexusTooltip,
+  KrekuTooltip,
 } from "@/components/charts/chart-theme";
-import { GlassPanel } from "@/components/nexus/glass-panel";
+import { GlassPanel } from "@/components/kreku/glass-panel";
 import { CHART_COLORS } from "@/lib/constants";
 import { useLatestMetrics, useMetricsStore } from "@/store/metrics-store";
 import { formatClock } from "@/utils/format";
@@ -88,7 +88,7 @@ export function AnalyticsView() {
             <CartesianGrid {...CHART_GRID_PROPS} />
             <XAxis dataKey="time" {...CHART_AXIS_PROPS} interval="preserveStartEnd" minTickGap={48} />
             <YAxis domain={[0, 100]} {...CHART_AXIS_PROPS} />
-            <Tooltip content={NexusTooltip} cursor={{ stroke: "rgba(255,255,255,0.2)" }} />
+            <Tooltip content={KrekuTooltip} cursor={{ stroke: "rgba(255,255,255,0.2)" }} />
             <Area
               type="monotone"
               dataKey="power"
@@ -119,7 +119,7 @@ export function AnalyticsView() {
               fillOpacity={0.18}
               isAnimationActive={false}
             />
-            <Tooltip content={NexusTooltip} />
+            <Tooltip content={KrekuTooltip} />
           </RadarChart>
         </ResponsiveContainer>
       </Panel>
@@ -141,7 +141,7 @@ export function AnalyticsView() {
                   <Cell key={slice.name} fill={slice.color} />
                 ))}
               </Pie>
-              <Tooltip content={NexusTooltip} />
+              <Tooltip content={KrekuTooltip} />
             </PieChart>
           </ResponsiveContainer>
           <ul className="flex flex-col gap-2">
@@ -162,7 +162,7 @@ export function AnalyticsView() {
             <CartesianGrid {...CHART_GRID_PROPS} />
             <XAxis dataKey="hour" {...CHART_AXIS_PROPS} />
             <YAxis {...CHART_AXIS_PROPS} />
-            <Tooltip content={NexusTooltip} cursor={{ fill: "rgba(255,255,255,0.04)" }} />
+            <Tooltip content={KrekuTooltip} cursor={{ fill: "rgba(255,255,255,0.04)" }} />
             <Bar
               dataKey="value"
               name="MB/s"

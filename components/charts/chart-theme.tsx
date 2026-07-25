@@ -16,7 +16,7 @@ export const CHART_GRID_PROPS = {
 } as const;
 
 /** Glass tooltip shared by all recharts instances. */
-export function NexusTooltip({
+export function KrekuTooltip({
   active,
   payload,
   label,

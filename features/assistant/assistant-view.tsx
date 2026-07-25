@@ -1,6 +1,6 @@
 "use client";
 
-import { GlassPanel } from "@/components/nexus/glass-panel";
+import { GlassPanel } from "@/components/kreku/glass-panel";
 import { AssistantChat } from "@/features/assistant/assistant-chat";
 import { AiCore } from "@/features/core/ai-core";
 import { useAssistantStore } from "@/store/assistant-store";
@@ -15,7 +15,7 @@ export function AssistantView() {
         <AiCore className="absolute inset-0" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between p-4 font-mono text-[11px] text-muted-foreground">
           <span>CONVERSATIONAL INTERFACE</span>
-          <span className="uppercase text-nexus">{status}</span>
+          <span className="uppercase text-kreku">{status}</span>
         </div>
       </GlassPanel>
       <GlassPanel className="flex min-h-[60vh] flex-col p-4">

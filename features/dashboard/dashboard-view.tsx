@@ -41,7 +41,7 @@ export function DashboardView() {
           playSound("click");
           resetLayout();
         }}
-        className="absolute -top-1 right-0 z-20 flex items-center gap-1.5 rounded-md border border-white/10 px-2 py-1 font-mono text-[10px] text-muted-foreground transition-colors hover:border-nexus/50 hover:text-nexus"
+        className="absolute -top-1 right-0 z-20 flex items-center gap-1.5 rounded-md border border-white/10 px-2 py-1 font-mono text-[10px] text-muted-foreground transition-colors hover:border-kreku/50 hover:text-kreku"
         aria-label="Reset dashboard layout"
       >
         <RotateCcw className="h-3 w-3" aria-hidden />

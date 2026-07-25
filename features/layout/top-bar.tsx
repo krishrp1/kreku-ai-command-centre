@@ -14,7 +14,7 @@ import { useSound } from "@/hooks/use-sound";
 import { useLatestMetrics } from "@/store/metrics-store";
 import { useSystemStore } from "@/store/system-store";
 import { useAssistantStore } from "@/store/assistant-store";
-import { StatusDot } from "@/components/nexus/status-dot";
+import { StatusDot } from "@/components/kreku/status-dot";
 import { cn } from "@/lib/utils";
 
 const timeFormat = new Intl.DateTimeFormat("en-GB", {
@@ -47,7 +47,7 @@ export function TopBar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      <span className="font-display text-sm font-bold tracking-[0.25em] text-nexus text-glow">
+      <span className="font-display text-sm font-bold tracking-[0.25em] text-kreku text-glow">
         {APP_NAME}
       </span>
 
@@ -71,7 +71,7 @@ export function TopBar() {
           playSound("click");
           setCommandPaletteOpen(true);
         }}
-        className="ml-auto flex h-8 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs text-muted-foreground transition-all hover:border-nexus/50 hover:text-foreground"
+        className="ml-auto flex h-8 items-center gap-2 rounded-lg border border-white/10 px-3 text-xs text-muted-foreground transition-all hover:border-kreku/50 hover:text-foreground"
         aria-label="Open command palette"
       >
         <Search className="h-3.5 w-3.5" aria-hidden />
@@ -87,8 +87,8 @@ export function TopBar() {
       </div>
 
       <div className="hidden items-center gap-1.5 text-muted-foreground sm:flex">
-        <Wifi className="h-4 w-4 text-nexus" aria-hidden />
-        <BatteryFull className="h-4 w-4 text-nexus-success" aria-hidden />
+        <Wifi className="h-4 w-4 text-kreku" aria-hidden />
+        <BatteryFull className="h-4 w-4 text-kreku-success" aria-hidden />
         <span className="font-mono text-xs">{Math.round(metrics.power)}%</span>
       </div>
 
@@ -98,12 +98,12 @@ export function TopBar() {
           playSound("click");
           setNotificationsOpen(!notificationsOpen);
         }}
-        className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-muted-foreground transition-all hover:border-nexus/50 hover:text-foreground"
+        className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-muted-foreground transition-all hover:border-kreku/50 hover:text-foreground"
         aria-label={`Notifications, ${unread} unread`}
       >
         <Bell className="h-4 w-4" aria-hidden />
         {unread > 0 && (
-          <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-nexus-danger px-1 font-mono text-[10px] text-white">
+          <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-kreku-danger px-1 font-mono text-[10px] text-white">
             {unread}
           </span>
         )}
@@ -124,7 +124,7 @@ export function TopBar() {
       </div>
 
       <div
-        className="flex h-8 w-8 items-center justify-center rounded-full border border-nexus/40 bg-nexus/10 font-display text-xs font-bold text-nexus"
+        className="flex h-8 w-8 items-center justify-center rounded-full border border-kreku/40 bg-kreku/10 font-display text-xs font-bold text-kreku"
         aria-label="User avatar"
       >
         KP

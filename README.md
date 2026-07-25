@@ -1,4 +1,4 @@
-# NEXUS — AI Command Centre
+# KREKU — AI Command Centre
 
 A futuristic AI operating system interface built as a flagship frontend portfolio project. Original holographic design — no movie assets, no copied UI.
 

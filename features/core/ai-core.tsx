@@ -5,14 +5,18 @@ import { Float, MeshDistortMaterial, Sparkles } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
+import { ACCENTS } from "@/lib/constants";
 import { useMotionSafe } from "@/hooks/use-motion-safe";
 import { useAssistantStore } from "@/store/assistant-store";
+import { useSystemStore } from "@/store/system-store";
 
-const ACCENT = new THREE.Color("#00e5ff");
-const ACCENT_DIM = new THREE.Color("#0891b2");
+interface CoreColors {
+  accent: THREE.Color;
+  dim: THREE.Color;
+}
 
 /** Central pulsing energy sphere. Distortion speeds up while the AI works. */
-function EnergySphere() {
+function EnergySphere({ colors }: { colors: CoreColors }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const status = useAssistantStore((s) => s.status);
 
@@ -34,8 +38,8 @@ function EnergySphere() {
     <mesh ref={meshRef}>
       <icosahedronGeometry args={[1.1, 24]} />
       <MeshDistortMaterial
-        color={ACCENT_DIM}
-        emissive={ACCENT}
+        color={colors.dim}
+        emissive={colors.accent}
         emissiveIntensity={busy ? 0.9 : 0.45}
         roughness={0.15}
         metalness={0.8}
@@ -48,7 +52,7 @@ function EnergySphere() {
 }
 
 /** Inner solid glow core behind the wireframe shell. */
-function InnerCore() {
+function InnerCore({ colors }: { colors: CoreColors }) {
   const meshRef = useRef<THREE.Mesh>(null);
   useFrame(({ clock }) => {
     const mesh = meshRef.current;
@@ -59,13 +63,13 @@ function InnerCore() {
   return (
     <mesh ref={meshRef}>
       <sphereGeometry args={[1, 32, 32]} />
-      <meshBasicMaterial color={ACCENT} transparent opacity={0.16} />
+      <meshBasicMaterial color={colors.accent} transparent opacity={0.16} />
     </mesh>
   );
 }
 
 /** Three tilted rings slowly counter-rotating around the core. */
-function OrbitRings() {
+function OrbitRings({ colors }: { colors: CoreColors }) {
   const groupRef = useRef<THREE.Group>(null);
   useFrame(({ clock }) => {
     const group = groupRef.current;
@@ -88,7 +92,7 @@ function OrbitRings() {
       {rings.map((ring) => (
         <mesh key={ring.radius} rotation={ring.tilt}>
           <torusGeometry args={[ring.radius, 0.008, 8, 128]} />
-          <meshBasicMaterial color={ACCENT} transparent opacity={ring.opacity} />
+          <meshBasicMaterial color={colors.accent} transparent opacity={ring.opacity} />
         </mesh>
       ))}
     </group>
@@ -96,7 +100,7 @@ function OrbitRings() {
 }
 
 /** Small satellites orbiting on the outer ring plane. */
-function Satellites() {
+function Satellites({ colors }: { colors: CoreColors }) {
   const groupRef = useRef<THREE.Group>(null);
   const satellites = useMemo(
     () =>
@@ -126,7 +130,7 @@ function Satellites() {
       {satellites.map((s) => (
         <mesh key={s.angle}>
           <octahedronGeometry args={[0.055]} />
-          <meshBasicMaterial color={ACCENT} />
+          <meshBasicMaterial color={colors.accent} />
         </mesh>
       ))}
     </group>
@@ -149,9 +153,15 @@ interface AiCoreProps {
   bloom?: boolean;
 }
 
-/** Holographic AI core scene. Falls back to a static frame under reduced motion. */
+/** Holographic AI core scene, tinted by the active accent theme. */
 export function AiCore({ className, bloom = true }: AiCoreProps) {
   const motionSafe = useMotionSafe();
+  const accentId = useSystemStore((s) => s.accent);
+
+  const colors = useMemo<CoreColors>(() => {
+    const accent = new THREE.Color(ACCENTS[accentId].hex);
+    return { accent, dim: accent.clone().multiplyScalar(0.55) };
+  }, [accentId]);
 
   return (
     <div className={className} role="img" aria-label="Holographic AI core visualization">
@@ -162,14 +172,20 @@ export function AiCore({ className, bloom = true }: AiCoreProps) {
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       >
         <ambientLight intensity={0.4} />
-        <pointLight position={[4, 4, 4]} intensity={12} color={ACCENT} />
+        <pointLight position={[4, 4, 4]} intensity={12} color={colors.accent} />
         <Float speed={motionSafe ? 1.4 : 0} rotationIntensity={0.2} floatIntensity={0.4}>
-          <EnergySphere />
-          <InnerCore />
+          <EnergySphere colors={colors} />
+          <InnerCore colors={colors} />
         </Float>
-        <OrbitRings />
-        <Satellites />
-        <Sparkles count={70} scale={5.5} size={1.6} speed={motionSafe ? 0.35 : 0} color={ACCENT} />
+        <OrbitRings colors={colors} />
+        <Satellites colors={colors} />
+        <Sparkles
+          count={70}
+          scale={5.5}
+          size={1.6}
+          speed={motionSafe ? 0.35 : 0}
+          color={colors.accent}
+        />
         {motionSafe && <CameraRig />}
         {bloom && (
           <EffectComposer>

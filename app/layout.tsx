@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NEXUS — AI Command Centre",
+  title: "KREKU — AI Command Centre",
   description:
     "A futuristic AI operating system interface: holographic dashboards, live telemetry, 3D core, and an integrated assistant.",
 };

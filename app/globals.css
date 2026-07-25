@@ -48,16 +48,16 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* NEXUS accent system — resolved from the active accent (see [data-accent]) */
-  --color-nexus: var(--nexus-accent);
-  --color-nexus-soft: var(--nexus-accent-soft);
-  --color-nexus-cyan: #00e5ff;
-  --color-nexus-blue: #3b82f6;
-  --color-nexus-purple: #8b5cf6;
-  --color-nexus-teal: #14b8a6;
-  --color-nexus-danger: #ff3b30;
-  --color-nexus-warning: #f59e0b;
-  --color-nexus-success: #22c55e;
+  /* KREKU accent system — resolved from the active accent (see [data-accent]) */
+  --color-kreku: var(--kreku-accent);
+  --color-kreku-soft: var(--kreku-accent-soft);
+  --color-kreku-cyan: #00e5ff;
+  --color-kreku-blue: #3b82f6;
+  --color-kreku-purple: #8b5cf6;
+  --color-kreku-teal: #14b8a6;
+  --color-kreku-danger: #ff3b30;
+  --color-kreku-warning: #f59e0b;
+  --color-kreku-success: #22c55e;
 }
 
 :root {
@@ -68,7 +68,7 @@
   --card-foreground: #ffffff;
   --popover: rgba(10, 14, 22, 0.92);
   --popover-foreground: #ffffff;
-  --primary: var(--nexus-accent);
+  --primary: var(--kreku-accent);
   --primary-foreground: #04070c;
   --secondary: rgba(255, 255, 255, 0.06);
   --secondary-foreground: #ffffff;
@@ -79,7 +79,7 @@
   --destructive: #ff3b30;
   --border: rgba(255, 255, 255, 0.09);
   --input: rgba(255, 255, 255, 0.1);
-  --ring: var(--nexus-accent);
+  --ring: var(--kreku-accent);
   --chart-1: #00e5ff;
   --chart-2: #3b82f6;
   --chart-3: #8b5cf6;
@@ -88,30 +88,34 @@
   --radius: 0.75rem;
   --sidebar: rgba(10, 14, 22, 0.6);
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: var(--nexus-accent);
+  --sidebar-primary: var(--kreku-accent);
   --sidebar-primary-foreground: #04070c;
   --sidebar-accent: rgba(255, 255, 255, 0.08);
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: rgba(255, 255, 255, 0.09);
-  --sidebar-ring: var(--nexus-accent);
+  --sidebar-ring: var(--kreku-accent);
 
-  --nexus-accent: #00e5ff;
-  --nexus-accent-soft: rgba(0, 229, 255, 0.14);
-  --nexus-glass-blur: 18px;
-  --nexus-glow: 0 0 24px;
+  --kreku-accent: #00e5ff;
+  --kreku-accent-soft: rgba(0, 229, 255, 0.14);
+  --kreku-glass-blur: 18px;
+  --kreku-glow: 0 0 24px;
 }
 
 [data-accent="blue"] {
-  --nexus-accent: #3b82f6;
-  --nexus-accent-soft: rgba(59, 130, 246, 0.14);
+  --kreku-accent: #3b82f6;
+  --kreku-accent-soft: rgba(59, 130, 246, 0.14);
 }
 [data-accent="purple"] {
-  --nexus-accent: #8b5cf6;
-  --nexus-accent-soft: rgba(139, 92, 246, 0.14);
+  --kreku-accent: #8b5cf6;
+  --kreku-accent-soft: rgba(139, 92, 246, 0.14);
 }
 [data-accent="teal"] {
-  --nexus-accent: #14b8a6;
-  --nexus-accent-soft: rgba(20, 184, 166, 0.14);
+  --kreku-accent: #14b8a6;
+  --kreku-accent-soft: rgba(20, 184, 166, 0.14);
+}
+[data-accent="red"] {
+  --kreku-accent: #ef4444;
+  --kreku-accent-soft: rgba(239, 68, 68, 0.14);
 }
 
 [data-contrast="high"] {
@@ -133,7 +137,7 @@
     @apply bg-background text-foreground overflow-hidden;
   }
   ::selection {
-    background: var(--nexus-accent-soft);
+    background: var(--kreku-accent-soft);
     color: #fff;
   }
   *::-webkit-scrollbar {
@@ -148,7 +152,7 @@
     border-radius: 999px;
   }
   *::-webkit-scrollbar-thumb:hover {
-    background: var(--nexus-accent);
+    background: var(--kreku-accent);
   }
 }
 
@@ -156,21 +160,21 @@
   /* Frosted holographic surface used by every panel */
   .glass {
     background: var(--card);
-    backdrop-filter: blur(var(--nexus-glass-blur)) saturate(1.4);
-    -webkit-backdrop-filter: blur(var(--nexus-glass-blur)) saturate(1.4);
+    backdrop-filter: blur(var(--kreku-glass-blur)) saturate(1.4);
+    -webkit-backdrop-filter: blur(var(--kreku-glass-blur)) saturate(1.4);
     border: 1px solid var(--border);
   }
   .glass-strong {
     background: var(--popover);
-    backdrop-filter: blur(calc(var(--nexus-glass-blur) * 1.4)) saturate(1.5);
-    -webkit-backdrop-filter: blur(calc(var(--nexus-glass-blur) * 1.4)) saturate(1.5);
+    backdrop-filter: blur(calc(var(--kreku-glass-blur) * 1.4)) saturate(1.5);
+    -webkit-backdrop-filter: blur(calc(var(--kreku-glass-blur) * 1.4)) saturate(1.5);
     border: 1px solid var(--border);
   }
   .glow-accent {
-    box-shadow: var(--nexus-glow) color-mix(in srgb, var(--nexus-accent) 35%, transparent);
+    box-shadow: var(--kreku-glow) color-mix(in srgb, var(--kreku-accent) 35%, transparent);
   }
   .text-glow {
-    text-shadow: 0 0 12px color-mix(in srgb, var(--nexus-accent) 60%, transparent);
+    text-shadow: 0 0 12px color-mix(in srgb, var(--kreku-accent) 60%, transparent);
   }
   .holo-border {
     position: relative;
@@ -183,10 +187,10 @@
     padding: 1px;
     background: linear-gradient(
       130deg,
-      color-mix(in srgb, var(--nexus-accent) 55%, transparent),
+      color-mix(in srgb, var(--kreku-accent) 55%, transparent),
       transparent 30%,
       transparent 70%,
-      color-mix(in srgb, var(--nexus-accent) 35%, transparent)
+      color-mix(in srgb, var(--kreku-accent) 35%, transparent)
     );
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -208,7 +212,7 @@
   }
 }
 
-@keyframes nexus-pulse {
+@keyframes kreku-pulse {
   0%,
   100% {
     opacity: 1;
@@ -217,12 +221,12 @@
     opacity: 0.45;
   }
 }
-@keyframes nexus-spin-slow {
+@keyframes kreku-spin-slow {
   to {
     transform: rotate(360deg);
   }
 }
-@keyframes nexus-float {
+@keyframes kreku-float {
   0%,
   100% {
     transform: translateY(0);
@@ -231,7 +235,7 @@
     transform: translateY(-6px);
   }
 }
-@keyframes nexus-shimmer {
+@keyframes kreku-shimmer {
   from {
     background-position: -200% 0;
   }
@@ -240,17 +244,17 @@
   }
 }
 
-.animate-nexus-pulse {
-  animation: nexus-pulse 2.4s ease-in-out infinite;
+.animate-kreku-pulse {
+  animation: kreku-pulse 2.4s ease-in-out infinite;
 }
-.animate-nexus-spin-slow {
-  animation: nexus-spin-slow 24s linear infinite;
+.animate-kreku-spin-slow {
+  animation: kreku-spin-slow 24s linear infinite;
 }
-.animate-nexus-float {
-  animation: nexus-float 5s ease-in-out infinite;
+.animate-kreku-float {
+  animation: kreku-float 5s ease-in-out infinite;
 }
-.animate-nexus-shimmer {
-  animation: nexus-shimmer 2.2s linear infinite;
+.animate-kreku-shimmer {
+  animation: kreku-shimmer 2.2s linear infinite;
 }
 
 /* react-grid-layout structural styles (library ships no CSS in v2) */
@@ -269,11 +273,11 @@
   will-change: transform;
 }
 .react-grid-item.react-draggable-dragging .glass {
-  box-shadow: 0 0 32px color-mix(in srgb, var(--nexus-accent) 30%, transparent);
+  box-shadow: 0 0 32px color-mix(in srgb, var(--kreku-accent) 30%, transparent);
 }
 .react-grid-item.react-grid-placeholder {
-  background: var(--nexus-accent-soft);
-  border: 1px dashed color-mix(in srgb, var(--nexus-accent) 50%, transparent);
+  background: var(--kreku-accent-soft);
+  border: 1px dashed color-mix(in srgb, var(--kreku-accent) 50%, transparent);
   border-radius: var(--radius-xl);
   opacity: 0.6;
   transition-duration: 100ms;

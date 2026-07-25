@@ -43,7 +43,7 @@ export function AssistantChat({ className }: { className?: string }) {
             className={cn(
               "max-w-[85%] rounded-xl px-3 py-2 text-sm leading-relaxed",
               message.role === "assistant"
-                ? "border border-nexus/20 bg-nexus/8 text-foreground"
+                ? "border border-kreku/20 bg-kreku/8 text-foreground"
                 : "ml-auto bg-white/8 text-foreground",
             )}
           >
@@ -51,7 +51,7 @@ export function AssistantChat({ className }: { className?: string }) {
             {message.role === "assistant" &&
               status === "responding" &&
               message === messages[messages.length - 1] && (
-                <span className="ml-1 inline-block h-3.5 w-1.5 animate-nexus-pulse bg-nexus align-middle" />
+                <span className="ml-1 inline-block h-3.5 w-1.5 animate-kreku-pulse bg-kreku align-middle" />
               )}
           </motion.div>
         ))}
@@ -59,13 +59,13 @@ export function AssistantChat({ className }: { className?: string }) {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex w-fit items-center gap-1.5 rounded-xl border border-nexus/20 bg-nexus/8 px-3 py-2"
+            className="flex w-fit items-center gap-1.5 rounded-xl border border-kreku/20 bg-kreku/8 px-3 py-2"
             aria-label="Assistant is thinking"
           >
             {[0, 1, 2].map((dot) => (
               <motion.span
                 key={dot}
-                className="h-1.5 w-1.5 rounded-full bg-nexus"
+                className="h-1.5 w-1.5 rounded-full bg-kreku"
                 animate={{ opacity: [0.3, 1, 0.3] }}
                 transition={{ duration: 1, repeat: Infinity, delay: dot * 0.2 }}
               />
@@ -81,7 +81,7 @@ export function AssistantChat({ className }: { className?: string }) {
               key={prompt}
               type="button"
               onClick={() => submit(prompt)}
-              className="rounded-full border border-white/10 px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-nexus/50 hover:text-nexus"
+              className="rounded-full border border-white/10 px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-kreku/50 hover:text-kreku"
             >
               {prompt}
             </button>
@@ -101,16 +101,16 @@ export function AssistantChat({ className }: { className?: string }) {
           <input
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            placeholder={busy ? "NEXUS is responding…" : "Ask NEXUS anything…"}
+            placeholder={busy ? "KREKU is responding…" : "Ask KREKU anything…"}
             disabled={busy}
-            aria-label="Message NEXUS"
-            className="h-9 min-w-0 flex-1 rounded-lg border border-white/10 bg-white/5 px-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-nexus/60"
+            aria-label="Message KREKU"
+            className="h-9 min-w-0 flex-1 rounded-lg border border-white/10 bg-white/5 px-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-kreku/60"
           />
           <button
             type="submit"
             disabled={busy || !input.trim()}
             aria-label="Send message"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-nexus/40 bg-nexus/10 text-nexus transition-all hover:glow-accent disabled:opacity-40"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-kreku/40 bg-kreku/10 text-kreku transition-all hover:glow-accent disabled:opacity-40"
           >
             <SendHorizonal className="h-4 w-4" aria-hidden />
           </button>

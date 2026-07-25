@@ -5,6 +5,7 @@ export const ACCENTS: Record<AccentId, { label: string; hex: string }> = {
   blue: { label: "Ion Blue", hex: "#3B82F6" },
   purple: { label: "Plasma Purple", hex: "#8B5CF6" },
   teal: { label: "Quantum Teal", hex: "#14B8A6" },
+  red: { label: "Crimson Red", hex: "#EF4444" },
 };
 
 export const CHART_COLORS = {
@@ -24,5 +25,5 @@ export const METRICS_HISTORY = 30;
 
 export const BOOT_TOTAL_MS = 7000;
 
-export const APP_NAME = "NEXUS";
+export const APP_NAME = "KREKU";
 export const APP_TAGLINE = "AI Command Centre";

@@ -56,7 +56,7 @@ export const TERMINAL_COMMANDS: Record<string, CommandHandler> = {
   ],
   projects: () => [
     "ACTIVE PROJECTS",
-    "  ▸ NEXUS Command Centre ....... this interface",
+    "  ▸ KREKU Command Centre ....... this interface",
     "  ▸ Orbital Tracker ............ satellite telemetry",
     "  ▸ Neural Lattice ............. AI subsystem",
   ],

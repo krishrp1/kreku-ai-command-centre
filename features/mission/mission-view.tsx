@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GlassPanel } from "@/components/nexus/glass-panel";
-import { StatusDot } from "@/components/nexus/status-dot";
+import { GlassPanel } from "@/components/kreku/glass-panel";
+import { StatusDot } from "@/components/kreku/status-dot";
 import { AiCore } from "@/features/core/ai-core";
 import { RadarSweep } from "@/features/mission/radar-sweep";
 import { useMetricsStore, useLatestMetrics } from "@/store/metrics-store";
@@ -48,7 +48,7 @@ export function MissionView() {
               </span>
               <StatusDot tone={readout.tone} />
             </div>
-            <p className="font-display mt-2 text-2xl text-nexus text-glow tabular-nums">
+            <p className="font-display mt-2 text-2xl text-kreku text-glow tabular-nums">
               {readout.value}
             </p>
           </GlassPanel>
@@ -71,7 +71,7 @@ export function MissionView() {
       >
         <AiCore className="absolute inset-0" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between p-4 font-mono text-[11px] text-muted-foreground">
-          <span>NEXUS CORE v5.2.1</span>
+          <span>KREKU CORE v5.2.1</span>
           <span className="flex items-center gap-2">
             <StatusDot tone="accent" /> HOLOGRAPHIC LINK STABLE
           </span>
@@ -99,7 +99,7 @@ export function MissionView() {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-baseline gap-2 border-b border-white/5 pb-2"
             >
-              <span className="shrink-0 text-nexus/70">{formatClock(event.timestamp)}</span>
+              <span className="shrink-0 text-kreku/70">{formatClock(event.timestamp)}</span>
               <span>
                 <span className="text-foreground">{event.label}</span>{" "}
                 <span className="text-muted-foreground">{event.detail}</span>

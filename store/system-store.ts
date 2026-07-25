@@ -91,7 +91,7 @@ export const useSystemStore = create<SystemState>()(
       clearNotifications: () => set({ notifications: [] }),
     }),
     {
-      name: "nexus-system",
+      name: "kreku-system",
       partialize: (state) => ({
         accent: state.accent,
         soundEnabled: state.soundEnabled,

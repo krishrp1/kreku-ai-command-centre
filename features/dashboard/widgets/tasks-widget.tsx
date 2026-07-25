@@ -45,8 +45,8 @@ export function TasksWidget() {
                 className={cn(
                   "flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors",
                   task.done
-                    ? "border-nexus bg-nexus/20 text-nexus"
-                    : "border-white/20 text-transparent group-hover:border-nexus/50",
+                    ? "border-kreku bg-kreku/20 text-kreku"
+                    : "border-white/20 text-transparent group-hover:border-kreku/50",
                 )}
                 aria-hidden
               >

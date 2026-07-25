@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { GlassPanel } from "@/components/nexus/glass-panel";
+import { GlassPanel } from "@/components/kreku/glass-panel";
 import { TERMINAL_COMMANDS } from "@/features/terminal/terminal-commands";
 import { useSound } from "@/hooks/use-sound";
 import { useLatestMetrics } from "@/store/metrics-store";
@@ -15,7 +15,7 @@ const line = (kind: TerminalLine["kind"], text: string): TerminalLine => ({
 });
 
 const WELCOME = [
-  line("system", "NEXUS TERMINAL v5.2.1 — secure channel established"),
+  line("system", "KREKU TERMINAL v5.2.1 — secure channel established"),
   line("system", "Type 'help' for available commands."),
 ];
 
@@ -62,11 +62,11 @@ export function TerminalView() {
       onClick={() => inputRef.current?.focus()}
     >
       <div className="mb-2 flex items-center gap-2">
-        <span className="h-2.5 w-2.5 rounded-full bg-nexus-danger/80" aria-hidden />
-        <span className="h-2.5 w-2.5 rounded-full bg-nexus-warning/80" aria-hidden />
-        <span className="h-2.5 w-2.5 rounded-full bg-nexus-success/80" aria-hidden />
+        <span className="h-2.5 w-2.5 rounded-full bg-kreku-danger/80" aria-hidden />
+        <span className="h-2.5 w-2.5 rounded-full bg-kreku-warning/80" aria-hidden />
+        <span className="h-2.5 w-2.5 rounded-full bg-kreku-success/80" aria-hidden />
         <span className="ml-2 text-[11px] tracking-widest text-muted-foreground">
-          nexus@core — /secure/ops
+          kreku@core — /secure/ops
         </span>
       </div>
 
@@ -78,13 +78,13 @@ export function TerminalView() {
               entry.kind === "input"
                 ? "text-foreground"
                 : entry.kind === "system"
-                  ? "text-nexus"
+                  ? "text-kreku"
                   : "whitespace-pre text-muted-foreground"
             }
           >
             {entry.kind === "input" ? (
               <>
-                <span className="text-nexus">❯ </span>
+                <span className="text-kreku">❯ </span>
                 {entry.text}
               </>
             ) : (
@@ -102,7 +102,7 @@ export function TerminalView() {
           setInput("");
         }}
       >
-        <span className="text-nexus" aria-hidden>
+        <span className="text-kreku" aria-hidden>
           ❯
         </span>
         <input
@@ -131,7 +131,7 @@ export function TerminalView() {
           aria-label="Terminal input"
           autoComplete="off"
           spellCheck={false}
-          className="min-w-0 flex-1 bg-transparent text-foreground caret-[var(--nexus-accent)] outline-none placeholder:text-muted-foreground/40"
+          className="min-w-0 flex-1 bg-transparent text-foreground caret-[var(--kreku-accent)] outline-none placeholder:text-muted-foreground/40"
         />
       </form>
     </GlassPanel>
