@@ -9,19 +9,29 @@ import { useSound } from "@/hooks/use-sound";
 
 const BARS = Array.from({ length: 28 }, (_, i) => i);
 
+const TRACKS = [
+  { title: "Orbital Drift", artist: "Signal Array — Deep Systems" },
+  { title: "Ion Trail", artist: "Vanta-3 — Low Orbit" },
+  { title: "Helios Static", artist: "Relay Ghosts — Uplink" },
+  { title: "Perigee", artist: "Signal Array — Deep Systems" },
+  { title: "Cold Telemetry", artist: "Kessler — Debris Field" },
+];
+
 /** Mock music player with an animated waveform. No real audio playback. */
 export function MusicWidget() {
   const [playing, setPlaying] = useState(true);
+  const [trackIndex, setTrackIndex] = useState(0);
   const motionSafe = useMotionSafe();
   const playSound = useSound();
   const animateBars = playing && motionSafe;
+  const track = TRACKS[trackIndex];
 
   return (
     <WidgetShell title="Now Playing">
       <div className="flex h-full flex-col justify-center gap-3">
         <div className="leading-tight">
-          <p className="text-sm text-foreground">Orbital Drift</p>
-          <p className="font-mono text-[10px] text-muted-foreground">Signal Array — Deep Systems</p>
+          <p className="text-sm text-foreground">{track.title}</p>
+          <p className="font-mono text-[10px] text-muted-foreground">{track.artist}</p>
         </div>
 
         <div className="flex h-10 items-end gap-1" aria-hidden>
@@ -48,7 +58,10 @@ export function MusicWidget() {
             type="button"
             className="text-muted-foreground transition-colors hover:text-kreku"
             aria-label="Previous track"
-            onClick={() => playSound("click")}
+            onClick={() => {
+              playSound("click");
+              setTrackIndex((i) => (i - 1 + TRACKS.length) % TRACKS.length);
+            }}
           >
             <SkipBack className="h-4 w-4" aria-hidden />
           </button>
@@ -67,7 +80,10 @@ export function MusicWidget() {
             type="button"
             className="text-muted-foreground transition-colors hover:text-kreku"
             aria-label="Next track"
-            onClick={() => playSound("click")}
+            onClick={() => {
+              playSound("click");
+              setTrackIndex((i) => (i + 1) % TRACKS.length);
+            }}
           >
             <SkipForward className="h-4 w-4" aria-hidden />
           </button>

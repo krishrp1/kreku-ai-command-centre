@@ -19,11 +19,12 @@ const MAX_HISTORY = 20;
 
 /**
  * Per-IP sliding-window limiter — this route is billable, and the site has
- * no auth. Set below the lite tier's free-tier quota (15 req/min, 1000
- * req/day at time of writing) so our own limiter degrades requests
- * gracefully before Google's quota wall does.
+ * no auth. Kept below the lite tier's free-tier RPM ceiling (15 req/min at
+ * time of writing), which is per-project and shared across every visitor,
+ * so this route's own graceful degradation fires before Google's raw
+ * quota error can surface.
  */
-const RATE_LIMIT = 4;
+const RATE_LIMIT = 5;
 const RATE_WINDOW_MS = 60_000;
 const MAX_TRACKED_IPS = 5000;
 const requestLog = new Map<string, number[]>();

@@ -129,7 +129,7 @@ const OFFLINE_RESPONDERS: Responder[] = [
     /thank|thanks|cheers/i.test(input) ? "Anytime. Not like I'm going anywhere." : null,
   (input) =>
     /real|fake|simulated|demo/i.test(input)
-      ? "Yeah, the telemetry's all made up — this is a portfolio piece, not a real command centre. Hook up a GEMINI_API_KEY though and the conversation gets a lot less scripted."
+      ? "Yeah, the telemetry's all made up — this is a portfolio piece, not a real command centre. Wake my smarter side up and the conversation gets a lot less scripted, though."
       : null,
 ];
 
@@ -144,7 +144,7 @@ function offlineReply(input: string): string {
   // Echo the topic back so unmatched inputs still feel heard.
   const topic = input.trim().replace(/[?.!]+$/, "");
   const preview = topic.length > 60 ? `${topic.slice(0, 57)}…` : topic;
-  return `I've logged "${preview}" but my offline reasoning module is limited — I can discuss system status, subsystems, satellites, security, or weather. For open conversation, the operator can connect a GEMINI_API_KEY to bring my full intelligence online.`;
+  return `I've logged "${preview}" but I'm running on backup thinking right now — I can still cover system status, subsystems, satellites, security, or weather. For real conversation, someone with the keys needs to wake up my full mind.`;
 }
 
 function streamOffline(id: string) {
