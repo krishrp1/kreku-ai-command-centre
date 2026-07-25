@@ -8,7 +8,7 @@ A futuristic AI operating system interface built as a flagship frontend portfoli
 - **Layered animated background** — stars, drifting particles, grid, nebula glows, rotating rings, mouse-reactive lighting, film grain
 - **3D AI core** (React Three Fiber) — distorted wireframe energy sphere, counter-rotating rings, orbiting satellites, bloom post-processing, pointer parallax, breathing idle
 - **Draggable dashboard** (react-grid-layout v2) — 13 live widgets: CPU/RAM/GPU gauges, network, temperature, AI load, security, live logs, weather, tasks, crypto, music, core; layout persists locally
-- **AI assistant** — floating panel + full view, simulated streaming replies, status states (idle/listening/thinking/responding), voice waveform
+- **AI assistant** — floating panel + full view, status states, voice waveform. Streams real replies from the Claude API when `ANTHROPIC_API_KEY` is set; otherwise falls back to a built-in telemetry-aware offline engine
 - **Command palette** — `⌘K` / `Ctrl+K`, keyboard-first navigation, theme switching
 - **Terminal** — simulated shell (`help`, `status`, `scan`, `network`, `launch`, …) with history
 - **Satellite view** — point-cloud globe with orbit paths and tracked assets
@@ -31,7 +31,7 @@ Open http://localhost:3000. Production: `npm run build && npm start`.
 
 ## Deploy
 
-Zero-config on [Vercel](https://vercel.com) — import the repo and deploy. All data is simulated client-side; no environment variables required.
+Zero-config on [Vercel](https://vercel.com) — import the repo and deploy. No environment variables required. Optionally set `ANTHROPIC_API_KEY` to give the assistant a real brain (Claude API, streaming); without it the offline engine answers.
 
 ## Architecture
 

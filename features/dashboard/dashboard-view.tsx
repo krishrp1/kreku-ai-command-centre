@@ -13,6 +13,7 @@ export function DashboardView() {
   const layout = useDashboardStore((s) => s.layout);
   const setLayout = useDashboardStore((s) => s.setLayout);
   const resetLayout = useDashboardStore((s) => s.resetLayout);
+  const layoutVersion = useDashboardStore((s) => s.layoutVersion);
   const playSound = useSound();
   // Below md the grid collapses into stacked cards.
   const isMobile = useMediaQuery("(max-width: 767px)");
@@ -49,6 +50,7 @@ export function DashboardView() {
       </button>
       {mounted && (
         <ReactGridLayout
+          key={layoutVersion}
           layout={layout}
           width={width}
           gridConfig={{ cols: 12, rowHeight: 34, margin: [16, 16] }}

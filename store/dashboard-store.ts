@@ -37,6 +37,8 @@ export const DEFAULT_LAYOUT: Layout = [
 
 interface DashboardState {
   layout: Layout;
+  /** Bumped on reset to force the grid to remount with the default layout. */
+  layoutVersion: number;
   setLayout: (layout: Layout) => void;
   resetLayout: () => void;
 }
@@ -45,8 +47,13 @@ export const useDashboardStore = create<DashboardState>()(
   persist(
     (set) => ({
       layout: DEFAULT_LAYOUT,
+      layoutVersion: 0,
       setLayout: (layout) => set({ layout }),
-      resetLayout: () => set({ layout: DEFAULT_LAYOUT }),
+      resetLayout: () =>
+        set((state) => ({
+          layout: DEFAULT_LAYOUT,
+          layoutVersion: (state.layoutVersion ?? 0) + 1,
+        })),
     }),
     { name: "kreku-dashboard" },
   ),
