@@ -1,5 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
+import { createRateLimiter } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -24,25 +25,7 @@ const MAX_HISTORY = 20;
  * so this route's own graceful degradation fires before Google's raw
  * quota error can surface.
  */
-const RATE_LIMIT = 5;
-const RATE_WINDOW_MS = 60_000;
-const MAX_TRACKED_IPS = 5000;
-const requestLog = new Map<string, number[]>();
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  // Bound memory on a long-lived warm instance — sweep stale IPs once the
-  // map gets large instead of tracking every address that ever visited.
-  if (requestLog.size > MAX_TRACKED_IPS) {
-    for (const [key, entries] of requestLog) {
-      if (entries.every((t) => now - t >= RATE_WINDOW_MS)) requestLog.delete(key);
-    }
-  }
-  const timestamps = (requestLog.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
-  timestamps.push(now);
-  requestLog.set(ip, timestamps);
-  return timestamps.length > RATE_LIMIT;
-}
+const isRateLimited = createRateLimiter({ limit: 5, windowMs: 60_000 });
 
 function isValidMessage(value: unknown): value is ChatMessage {
   if (typeof value !== "object" || value === null) return false;
