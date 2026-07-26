@@ -8,7 +8,10 @@ let messageSeq = 0;
 interface AssistantState {
   status: AssistantStatus;
   messages: AssistantMessage[];
+  /** Sticky for the session once the server reports no API key — stop asking it. */
+  apiUnavailable: boolean;
   setStatus: (status: AssistantStatus) => void;
+  setApiUnavailable: (unavailable: boolean) => void;
   addMessage: (role: AssistantMessage["role"], content: string) => string;
   appendToMessage: (id: string, chunk: string) => void;
   clear: () => void;
@@ -16,6 +19,7 @@ interface AssistantState {
 
 export const useAssistantStore = create<AssistantState>((set) => ({
   status: "idle",
+  apiUnavailable: false,
   messages: [
     {
       id: "welcome",
@@ -26,6 +30,7 @@ export const useAssistantStore = create<AssistantState>((set) => ({
     },
   ],
   setStatus: (status) => set({ status }),
+  setApiUnavailable: (apiUnavailable) => set({ apiUnavailable }),
   addMessage: (role, content) => {
     const id = `msg-${Date.now()}-${messageSeq++}`;
     set((state) => ({

@@ -18,13 +18,18 @@ const CATEGORY_ICONS: Record<WeatherCategory, typeof Cloud> = {
 };
 
 export function WeatherWidget() {
-  const { data, isLoading } = useWeather();
+  const { data, isLoading, isError } = useWeather();
   const Icon = data ? CATEGORY_ICONS[data.category] : Cloud;
 
   return (
     <WidgetShell title={data ? `Weather — ${data.city}` : "Weather"}>
       <div className="flex h-full items-center gap-4">
-        {isLoading || !data ? (
+        {isError && !data ? (
+          <div className="flex items-center gap-3 text-muted-foreground">
+            <Cloud className="h-9 w-9" aria-hidden />
+            <p className="text-sm">Weather link down.</p>
+          </div>
+        ) : isLoading || !data ? (
           <div className="flex items-center gap-3">
             <Skeleton className="h-9 w-9 rounded-full" />
             <div className="space-y-1.5">

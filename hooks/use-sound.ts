@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
+import { getAudioContext } from "@/lib/audio-context";
 import { useSystemStore } from "@/store/system-store";
 
 type SoundKind = "hover" | "click" | "boot" | "ping" | "key";
@@ -11,13 +12,12 @@ type SoundKind = "hover" | "click" | "boot" | "ping" | "key";
  */
 export function useSound() {
   const enabled = useSystemStore((s) => s.soundEnabled);
-  const contextRef = useRef<AudioContext | null>(null);
 
   const play = useCallback(
     (kind: SoundKind) => {
-      if (!enabled || typeof window === "undefined") return;
-      contextRef.current ??= new AudioContext();
-      const ctx = contextRef.current;
+      if (!enabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
       if (ctx.state === "suspended") void ctx.resume();
 
       const osc = ctx.createOscillator();

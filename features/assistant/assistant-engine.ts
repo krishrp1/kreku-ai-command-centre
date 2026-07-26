@@ -10,9 +10,6 @@ import type { MetricsSample } from "@/types";
  * the offline engine so the demo works without any configuration.
  */
 
-// Sticky flag: once the server says "no key", stop asking it.
-let apiUnavailable = false;
-
 function formatTelemetry(metrics: MetricsSample) {
   return [
     `CPU ${Math.round(metrics.cpu)}%`,
@@ -26,7 +23,7 @@ function formatTelemetry(metrics: MetricsSample) {
 }
 
 async function streamFromApi(id: string): Promise<boolean> {
-  const { messages, appendToMessage, setStatus } = useAssistantStore.getState();
+  const { messages, appendToMessage, setStatus, setApiUnavailable } = useAssistantStore.getState();
   const metrics = useMetricsStore.getState().history.at(-1);
 
   const history = messages
@@ -45,7 +42,7 @@ async function streamFromApi(id: string): Promise<boolean> {
   if (!response.ok || !response.body) return false;
   // A JSON body means the server has no API key — permanent for this session.
   if (response.headers.get("content-type")?.includes("application/json")) {
-    apiUnavailable = true;
+    setApiUnavailable(true);
     return false;
   }
 
@@ -168,7 +165,7 @@ function streamOffline(id: string) {
 }
 
 export function sendToAssistant(input: string) {
-  const { addMessage, setStatus } = useAssistantStore.getState();
+  const { addMessage, setStatus, apiUnavailable } = useAssistantStore.getState();
   addMessage("user", input);
   setStatus("thinking");
   const id = addMessage("assistant", "");

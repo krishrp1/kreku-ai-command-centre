@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { GlassPanel } from "@/components/kreku/glass-panel";
 import { TERMINAL_COMMANDS } from "@/features/terminal/terminal-commands";
 import { useSound } from "@/hooks/use-sound";
+import { useWeather } from "@/hooks/use-weather";
 import { useLatestMetrics } from "@/store/metrics-store";
 import type { TerminalLine } from "@/types";
 
@@ -26,6 +27,7 @@ export function TerminalView() {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const historyRef = useRef<string[]>([]);
   const metrics = useLatestMetrics();
+  const { data: weather } = useWeather();
   const playSound = useSound();
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -46,7 +48,7 @@ export function TerminalView() {
     }
     const handler = TERMINAL_COMMANDS[command];
     const output = handler
-      ? handler({ metrics })
+      ? handler({ metrics, weather })
       : [`command not found: ${command} — try 'help'`];
     setLines((current) => [
       ...current,

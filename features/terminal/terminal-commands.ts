@@ -1,8 +1,9 @@
 import { APP_NAME } from "@/lib/constants";
-import type { MetricsSample } from "@/types";
+import type { MetricsSample, WeatherData } from "@/types";
 
 interface CommandContext {
   metrics: MetricsSample;
+  weather: WeatherData | undefined;
 }
 
 type CommandHandler = (context: CommandContext) => string[];
@@ -65,7 +66,10 @@ export const TERMINAL_COMMANDS: Record<string, CommandHandler> = {
     "  TypeScript ▮▮▮▮▮▮▮▮▮▯  React ▮▮▮▮▮▮▮▮▮▯",
     "  Three.js  ▮▮▮▮▮▮▮▯▯▯   Design ▮▮▮▮▮▮▮▮▯▯",
   ],
-  weather: () => ["London: 18°C, partly cloudy. Light rain expected Monday."],
+  weather: ({ weather }) =>
+    weather
+      ? [`${weather.city}: ${weather.tempC}°C, ${weather.condition.toLowerCase()}.`]
+      : ["Weather link not established yet — try again in a moment."],
   date: () => [new Date().toDateString()],
   time: () => [new Date().toLocaleTimeString("en-GB")],
   about: () => [
