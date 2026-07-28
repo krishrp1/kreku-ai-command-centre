@@ -21,6 +21,12 @@ export function GaugeWidget({ title, metric, color, unit = "%", max = 100 }: Gau
   return (
     <WidgetShell title={title}>
       <div className="relative h-full">
+        {/* Segmented decorative track — "digital/quantized" texture per the
+            KREKU Command design system, behind the real smooth value arc. */}
+        <div
+          aria-hidden
+          className="absolute inset-[8%] rounded-full border-[5px] border-dashed border-white/[0.06]"
+        />
         <ResponsiveContainer width="100%" height="100%">
           <RadialBarChart
             data={[{ value }]}

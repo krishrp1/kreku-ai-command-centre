@@ -27,7 +27,7 @@ export function MusicWidget() {
   const track = TRACKS[trackIndex];
 
   return (
-    <WidgetShell title="Now Playing">
+    <WidgetShell title="Now Playing" showTag={false}>
       <div className="flex h-full flex-col justify-center gap-3">
         <div className="leading-tight">
           <p className="text-sm text-foreground">{track.title}</p>

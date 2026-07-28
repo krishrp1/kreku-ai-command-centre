@@ -160,6 +160,14 @@ function LayeredBackgroundImpl() {
         className="absolute inset-0 opacity-[0.05] mix-blend-overlay"
         style={{ backgroundImage: NOISE_URI }}
       />
+      {/* L8: fixed scan-line texture, per the KREKU Command design system */}
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, rgba(255,255,255,0.6) 0 1px, transparent 1px 3px)",
+        }}
+      />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Orbitron, Space_Grotesk } from "next/font/google";
+import { Orbitron, Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { AppProviders } from "@/providers/app-providers";
 
@@ -13,9 +13,12 @@ const orbitron = Orbitron({
   subsets: ["latin"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
+// Space Mono per the "KREKU Command" design system: all telemetry, timestamps,
+// and widget IDs render monospace to reinforce the hardware-engraved feel.
+const spaceMono = Space_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -36,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${orbitron.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${orbitron.variable} ${spaceMono.variable} h-full antialiased`}
       data-accent="cyan"
       data-motion="full"
       data-contrast="normal"
