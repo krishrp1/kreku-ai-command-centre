@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { PolarAngleAxis, RadialBar, RadialBarChart, ResponsiveContainer } from "recharts";
 import { CountUp } from "@/components/kreku/count-up";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
@@ -15,7 +16,7 @@ interface GaugeWidgetProps {
 }
 
 /** Ring gauge for a single 0–100 metric (RAM, GPU, temp, AI load). */
-export function GaugeWidget({ title, metric, color, unit = "%", max = 100 }: GaugeWidgetProps) {
+function GaugeWidgetImpl({ title, metric, color, unit = "%", max = 100 }: GaugeWidgetProps) {
   const value = useLatestMetrics()[metric];
 
   return (
@@ -56,3 +57,5 @@ export function GaugeWidget({ title, metric, color, unit = "%", max = 100 }: Gau
     </WidgetShell>
   );
 }
+
+export const GaugeWidget = memo(GaugeWidgetImpl);

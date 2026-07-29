@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { ShieldCheck, ShieldAlert, Lock, Radio, Fingerprint } from "lucide-react";
 import { StatusDot } from "@/components/kreku/status-dot";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
@@ -12,7 +13,7 @@ const CHECKS = [
   { icon: ShieldAlert, label: "Perimeter", detail: "1 probe deflected (443)", tone: "warning" },
 ] as const;
 
-export function SecurityWidget() {
+function SecurityWidgetImpl() {
   return (
     <WidgetShell title="Security">
       <ul className="flex h-full flex-col justify-center gap-2.5">
@@ -35,3 +36,5 @@ export function SecurityWidget() {
     </WidgetShell>
   );
 }
+
+export const SecurityWidget = memo(SecurityWidgetImpl);

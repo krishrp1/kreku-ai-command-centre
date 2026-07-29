@@ -11,7 +11,7 @@ const MAX_CACHE_ENTRIES = 2000;
 
 // Public, no auth. The cache alone doesn't stop an attacker from rotating
 // X-Forwarded-For to bypass it and hammer the (free-tier) upstream services.
-const isRateLimited = createRateLimiter({ limit: 20, windowMs: 60_000 });
+const isRateLimited = createRateLimiter({ limit: 20, windowMs: 60_000, prefix: "kreku:weather" });
 
 // Used for local dev / private IPs, where there's nothing real to geolocate.
 const DEFAULT_LOCATION = { city: "London", country: "United Kingdom", lat: 51.5074, lon: -0.1278 };
@@ -76,7 +76,7 @@ async function fetchForecast(lat: number, lon: number) {
 export async function GET(request: Request) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
 
-  if (isRateLimited(ip)) {
+  if (await isRateLimited(ip)) {
     return NextResponse.json({ error: "rate limited" }, { status: 429 });
   }
 

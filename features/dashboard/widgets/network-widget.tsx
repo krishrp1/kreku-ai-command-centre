@@ -1,5 +1,6 @@
 "use client";
 
+import { memo, useMemo } from "react";
 import {
   CartesianGrid,
   Legend,
@@ -20,13 +21,17 @@ import { CHART_COLORS } from "@/lib/constants";
 import { useMetricsStore } from "@/store/metrics-store";
 import { formatClock } from "@/utils/format";
 
-export function NetworkWidget() {
+function NetworkWidgetImpl() {
   const history = useMetricsStore((s) => s.history);
-  const data = history.map((sample) => ({
-    time: formatClock(sample.timestamp),
-    down: sample.networkDown,
-    up: sample.networkUp,
-  }));
+  const data = useMemo(
+    () =>
+      history.map((sample) => ({
+        time: formatClock(sample.timestamp),
+        down: sample.networkDown,
+        up: sample.networkUp,
+      })),
+    [history],
+  );
 
   return (
     <WidgetShell title="Network MB/s">
@@ -63,3 +68,5 @@ export function NetworkWidget() {
     </WidgetShell>
   );
 }
+
+export const NetworkWidget = memo(NetworkWidgetImpl);

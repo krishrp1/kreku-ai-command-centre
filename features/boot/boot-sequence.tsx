@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { APP_NAME, APP_TAGLINE, BOOT_TOTAL_MS } from "@/lib/constants";
+import { useMotionSafe } from "@/hooks/use-motion-safe";
 import { useSound } from "@/hooks/use-sound";
 import { useSystemStore } from "@/store/system-store";
 
@@ -27,6 +28,7 @@ const BOOT_STEPS: BootStep[] = [
 export function BootSequence() {
   const completeBoot = useSystemStore((s) => s.completeBoot);
   const playSound = useSound();
+  const motionSafe = useMotionSafe();
   const [progress, setProgress] = useState(0);
   const startRef = useRef<number | null>(null);
   const doneRef = useRef(false);
@@ -77,13 +79,13 @@ export function BootSequence() {
       <div className="relative flex items-center justify-center">
         <motion.div
           className="absolute h-52 w-52 rounded-full bg-kreku/10 blur-2xl"
-          animate={{ scale: [1, 1.25, 1], opacity: [0.4, 0.9, 0.4] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          animate={motionSafe ? { scale: [1, 1.25, 1], opacity: [0.4, 0.9, 0.4] } : { opacity: 0.6 }}
+          transition={motionSafe ? { duration: 2.2, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
         />
         <motion.div
           className="h-36 w-36 rounded-full border border-kreku/40"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          animate={motionSafe ? { rotate: 360 } : { rotate: 0 }}
+          transition={motionSafe ? { duration: 8, repeat: Infinity, ease: "linear" } : { duration: 0 }}
           style={{
             background:
               "conic-gradient(from 0deg, transparent 0deg, var(--kreku-accent-soft) 90deg, transparent 180deg)",
@@ -91,8 +93,8 @@ export function BootSequence() {
         />
         <motion.div
           className="absolute h-20 w-20 rounded-full bg-kreku/25 glow-accent"
-          animate={{ scale: [0.9, 1.08, 0.9] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          animate={motionSafe ? { scale: [0.9, 1.08, 0.9] } : { scale: 1 }}
+          transition={motionSafe ? { duration: 1.6, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
         />
         <span className="font-display absolute text-xl font-bold tracking-[0.3em] text-glow">
           {APP_NAME}

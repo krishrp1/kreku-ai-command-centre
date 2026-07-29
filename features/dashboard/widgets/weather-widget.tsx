@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Cloud, CloudDrizzle, CloudFog, CloudLightning, CloudRain, CloudSnow, CloudSun, Sun } from "lucide-react";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -17,7 +18,7 @@ const CATEGORY_ICONS: Record<WeatherCategory, typeof Cloud> = {
   thunderstorm: CloudLightning,
 };
 
-export function WeatherWidget() {
+function WeatherWidgetImpl() {
   const { data, isLoading, isError } = useWeather();
   const Icon = data ? CATEGORY_ICONS[data.category] : Cloud;
 
@@ -64,3 +65,5 @@ export function WeatherWidget() {
     </WidgetShell>
   );
 }
+
+export const WeatherWidget = memo(WeatherWidgetImpl);

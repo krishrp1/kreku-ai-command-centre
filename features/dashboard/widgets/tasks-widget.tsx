@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Check } from "lucide-react";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
 import { useSound } from "@/hooks/use-sound";
@@ -13,7 +13,7 @@ const INITIAL_TASKS = [
   { id: "t4", label: "Archive mission logs", done: false },
 ];
 
-export function TasksWidget() {
+function TasksWidgetImpl() {
   const [tasks, setTasks] = useState(INITIAL_TASKS);
   const playSound = useSound();
 
@@ -67,3 +67,5 @@ export function TasksWidget() {
     </WidgetShell>
   );
 }
+
+export const TasksWidget = memo(TasksWidgetImpl);

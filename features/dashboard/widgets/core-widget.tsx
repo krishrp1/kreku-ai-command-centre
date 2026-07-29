@@ -1,10 +1,11 @@
 "use client";
 
+import { memo } from "react";
 import { AiCore } from "@/features/core/ai-core";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
 import { useAssistantStore } from "@/store/assistant-store";
 
-export function CoreWidget() {
+function CoreWidgetImpl() {
   const status = useAssistantStore((s) => s.status);
   return (
     <WidgetShell
@@ -17,3 +18,5 @@ export function CoreWidget() {
     </WidgetShell>
   );
 }
+
+export const CoreWidget = memo(CoreWidgetImpl);

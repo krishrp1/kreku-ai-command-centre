@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Pause, Play, SkipBack, SkipForward } from "lucide-react";
 import { motion } from "framer-motion";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
@@ -18,7 +18,7 @@ const TRACKS = [
 ];
 
 /** Mock music player with an animated waveform. No real audio playback. */
-export function MusicWidget() {
+function MusicWidgetImpl() {
   const [playing, setPlaying] = useState(true);
   const [trackIndex, setTrackIndex] = useState(0);
   const motionSafe = useMotionSafe();
@@ -92,3 +92,5 @@ export function MusicWidget() {
     </WidgetShell>
   );
 }
+
+export const MusicWidget = memo(MusicWidgetImpl);

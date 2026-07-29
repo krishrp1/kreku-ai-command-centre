@@ -30,6 +30,8 @@ export function CommandPalette() {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -45,14 +47,34 @@ export function CommandPalette() {
 
   useEffect(() => {
     if (open) {
+      previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
       // Wait a frame so the input exists before resetting and focusing.
       requestAnimationFrame(() => {
         setQuery("");
         setSelected(0);
         inputRef.current?.focus();
       });
+    } else {
+      previouslyFocusedRef.current?.focus();
     }
   }, [open]);
+
+  const trapFocus = (event: React.KeyboardEvent) => {
+    if (event.key !== "Tab") return;
+    const focusables = panelRef.current?.querySelectorAll<HTMLElement>(
+      'button, input, [href], [tabindex]:not([tabindex="-1"])',
+    );
+    if (!focusables || focusables.length === 0) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
 
   const commands = useMemo<Command[]>(() => {
     const navigate: Command[] = NAV_ITEMS.map((item) => ({
@@ -108,6 +130,7 @@ export function CommandPalette() {
           onClick={() => setOpen(false)}
         >
           <motion.div
+            ref={panelRef}
             role="dialog"
             aria-modal="true"
             aria-label="Command palette"
@@ -117,6 +140,7 @@ export function CommandPalette() {
             exit={{ opacity: 0, y: -16, scale: 0.97 }}
             transition={{ duration: 0.2 }}
             onClick={(event) => event.stopPropagation()}
+            onKeyDown={trapFocus}
           >
             <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
               <Search className="h-4 w-4 text-kreku" aria-hidden />
@@ -140,20 +164,29 @@ export function CommandPalette() {
                 }}
                 placeholder="Type a command…"
                 aria-label="Search commands"
+                role="combobox"
+                aria-expanded={filtered.length > 0}
+                aria-controls="command-palette-listbox"
+                aria-activedescendant={filtered[selected] ? `command-option-${filtered[selected].id}` : undefined}
                 className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground/80"
               />
               <kbd className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
                 ESC
               </kbd>
             </div>
-            <ul className="max-h-72 overflow-y-auto p-2" role="listbox">
+            <ul id="command-palette-listbox" className="max-h-72 overflow-y-auto p-2" role="listbox">
               {filtered.length === 0 && (
                 <li className="px-3 py-6 text-center font-mono text-xs text-muted-foreground">
                   No matching commands
                 </li>
               )}
               {filtered.map((command, index) => (
-                <li key={command.id} role="option" aria-selected={index === selected}>
+                <li
+                  key={command.id}
+                  id={`command-option-${command.id}`}
+                  role="option"
+                  aria-selected={index === selected}
+                >
                   <button
                     type="button"
                     onClick={() => execute(command)}

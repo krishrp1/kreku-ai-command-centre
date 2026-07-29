@@ -5,6 +5,7 @@ import { SendHorizonal } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SUGGESTED_PROMPTS, sendToAssistant } from "@/features/assistant/assistant-engine";
 import { VoiceWaveform } from "@/features/assistant/voice-waveform";
+import { useMotionSafe } from "@/hooks/use-motion-safe";
 import { useSound } from "@/hooks/use-sound";
 import { useAssistantStore } from "@/store/assistant-store";
 import { cn } from "@/lib/utils";
@@ -15,6 +16,7 @@ export function AssistantChat({ className }: { className?: string }) {
   const status = useAssistantStore((s) => s.status);
   const [input, setInput] = useState("");
   const playSound = useSound();
+  const motionSafe = useMotionSafe();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,12 +36,18 @@ export function AssistantChat({ className }: { className?: string }) {
 
   return (
     <div className={cn("flex h-full min-h-0 flex-col", className)}>
-      <div ref={scrollRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto pr-1">
+      <div
+        ref={scrollRef}
+        className="min-h-0 flex-1 space-y-3 overflow-y-auto pr-1"
+        aria-live="polite"
+        role="log"
+      >
         {messages.map((message) => (
           <motion.div
             key={message.id}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: motionSafe ? 0.2 : 0 }}
             className={cn(
               "max-w-[85%] rounded-xl px-3 py-2 text-sm leading-relaxed",
               message.role === "assistant"
@@ -59,6 +67,7 @@ export function AssistantChat({ className }: { className?: string }) {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            transition={{ duration: motionSafe ? 0.2 : 0 }}
             className="flex w-fit items-center gap-1.5 rounded-xl border border-kreku/20 bg-kreku/8 px-3 py-2"
             aria-label="Assistant is thinking"
           >
@@ -66,8 +75,12 @@ export function AssistantChat({ className }: { className?: string }) {
               <motion.span
                 key={dot}
                 className="h-1.5 w-1.5 rounded-full bg-kreku"
-                animate={{ opacity: [0.3, 1, 0.3] }}
-                transition={{ duration: 1, repeat: Infinity, delay: dot * 0.2 }}
+                animate={motionSafe ? { opacity: [0.3, 1, 0.3] } : { opacity: 0.7 }}
+                transition={
+                  motionSafe
+                    ? { duration: 1, repeat: Infinity, delay: dot * 0.2 }
+                    : { duration: 0 }
+                }
               />
             ))}
           </motion.div>
@@ -104,7 +117,7 @@ export function AssistantChat({ className }: { className?: string }) {
             placeholder={busy ? "KREKU is responding…" : "Ask KREKU anything…"}
             disabled={busy}
             aria-label="Message KREKU"
-            className="h-9 min-w-0 flex-1 rounded-lg border border-white/10 bg-white/5 px-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/80 focus:border-kreku/60"
+            className="h-9 min-w-0 flex-1 rounded-lg border border-white/10 bg-white/5 px-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/80 focus-visible:border-kreku/60 focus-visible:ring-2 focus-visible:ring-kreku/40"
           />
           <button
             type="submit"

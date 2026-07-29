@@ -1,11 +1,12 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
 import { useMetricsStore } from "@/store/metrics-store";
 import { formatClock } from "@/utils/format";
 
-export function LogsWidget() {
+function LogsWidgetImpl() {
   const activity = useMetricsStore((s) => s.activity);
 
   return (
@@ -30,3 +31,5 @@ export function LogsWidget() {
     </WidgetShell>
   );
 }
+
+export const LogsWidget = memo(LogsWidgetImpl);

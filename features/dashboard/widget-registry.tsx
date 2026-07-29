@@ -1,18 +1,42 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
 import { CHART_COLORS } from "@/lib/constants";
 import type { WidgetId } from "@/store/dashboard-store";
-import { CoreWidget } from "@/features/dashboard/widgets/core-widget";
-import { CpuWidget } from "@/features/dashboard/widgets/cpu-widget";
-import { CryptoWidget } from "@/features/dashboard/widgets/crypto-widget";
-import { GaugeWidget } from "@/features/dashboard/widgets/gauge-widget";
-import { LogsWidget } from "@/features/dashboard/widgets/logs-widget";
-import { MusicWidget } from "@/features/dashboard/widgets/music-widget";
-import { NetworkWidget } from "@/features/dashboard/widgets/network-widget";
-import { SecurityWidget } from "@/features/dashboard/widgets/security-widget";
-import { TasksWidget } from "@/features/dashboard/widgets/tasks-widget";
-import { WeatherWidget } from "@/features/dashboard/widgets/weather-widget";
+
+// Code-split per widget — dashboard's chart/gauge weight (recharts, three.js
+// core widget) only ships once a view that actually renders the grid mounts.
+const CoreWidget = dynamic(() =>
+  import("@/features/dashboard/widgets/core-widget").then((m) => m.CoreWidget),
+);
+const CpuWidget = dynamic(() =>
+  import("@/features/dashboard/widgets/cpu-widget").then((m) => m.CpuWidget),
+);
+const CryptoWidget = dynamic(() =>
+  import("@/features/dashboard/widgets/crypto-widget").then((m) => m.CryptoWidget),
+);
+const GaugeWidget = dynamic(() =>
+  import("@/features/dashboard/widgets/gauge-widget").then((m) => m.GaugeWidget),
+);
+const LogsWidget = dynamic(() =>
+  import("@/features/dashboard/widgets/logs-widget").then((m) => m.LogsWidget),
+);
+const MusicWidget = dynamic(() =>
+  import("@/features/dashboard/widgets/music-widget").then((m) => m.MusicWidget),
+);
+const NetworkWidget = dynamic(() =>
+  import("@/features/dashboard/widgets/network-widget").then((m) => m.NetworkWidget),
+);
+const SecurityWidget = dynamic(() =>
+  import("@/features/dashboard/widgets/security-widget").then((m) => m.SecurityWidget),
+);
+const TasksWidget = dynamic(() =>
+  import("@/features/dashboard/widgets/tasks-widget").then((m) => m.TasksWidget),
+);
+const WeatherWidget = dynamic(() =>
+  import("@/features/dashboard/widgets/weather-widget").then((m) => m.WeatherWidget),
+);
 
 const RamWidget = () => (
   <GaugeWidget title="RAM" metric="ram" color={CHART_COLORS.blue} />

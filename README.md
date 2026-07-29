@@ -18,7 +18,7 @@ A futuristic AI operating system interface built as a flagship frontend portfoli
 
 ## Stack
 
-Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS 4 · shadcn/ui · Framer Motion · React Three Fiber + drei + postprocessing · Recharts · react-grid-layout v2 · Zustand · TanStack Query · Zod · Lucide
+Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS 4 · shadcn/ui · Framer Motion · React Three Fiber + drei + postprocessing · Recharts · react-grid-layout v2 · Zustand · TanStack Query · Lucide
 
 ## Run
 
@@ -29,9 +29,20 @@ npm run dev
 
 Open http://localhost:3000. Production: `npm run build && npm start`.
 
+Other scripts: `npm run lint`, `npm run typecheck` (`tsc --noEmit`).
+
+## Environment variables
+
+All optional — copy `.env.example` to `.env.local` and fill in what you need; the app works fully with none of them set.
+
+| Variable | Purpose | Without it |
+|---|---|---|
+| `GEMINI_API_KEY` | Gemini API key ([Google AI Studio](https://aistudio.google.com/apikey)) — powers real, streaming assistant replies. | Assistant falls back to a built-in telemetry-aware offline engine. |
+| `KV_REST_API_URL` / `KV_REST_API_TOKEN` | Upstash Redis (via `vercel integration add upstash/upstash-kv`, or a raw Upstash account using `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` instead) — backs the `/api/chat` and `/api/weather` rate limiters so limits hold across serverless instances. | Rate limiting falls back to an in-memory, per-instance counter — fine for local dev, not real protection in production. |
+
 ## Deploy
 
-Zero-config on [Vercel](https://vercel.com) — import the repo and deploy. No environment variables required. Optionally set `GEMINI_API_KEY` (from [Google AI Studio](https://aistudio.google.com/apikey)) to give the assistant a real brain (Gemini, streaming); without it the offline engine answers.
+Zero-config on [Vercel](https://vercel.com) — import the repo and deploy. No environment variables required; set any of the above to enable that feature.
 
 ## Architecture
 

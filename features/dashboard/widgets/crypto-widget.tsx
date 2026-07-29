@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo } from "react";
 import { TrendingDown, TrendingUp } from "lucide-react";
 import {
   Line,
@@ -11,8 +11,8 @@ import {
 } from "recharts";
 import { KrekuTooltip } from "@/components/charts/chart-theme";
 import { WidgetShell } from "@/features/dashboard/widget-shell";
-import { CHART_COLORS } from "@/lib/constants";
-import { METRICS_INTERVAL_MS } from "@/lib/constants";
+import { CHART_COLORS, METRICS_INTERVAL_MS } from "@/lib/constants";
+import { useSimulatedSeries } from "@/hooks/use-simulated-series";
 import { formatCurrency } from "@/utils/format";
 import { cn } from "@/lib/utils";
 
@@ -33,24 +33,13 @@ const INITIAL_ASSETS: Asset[] = [
   { symbol: "ETH", price: 4_120, history: seedHistory(4_120), color: CHART_COLORS.purple },
 ];
 
-export function CryptoWidget() {
-  const [assets, setAssets] = useState(INITIAL_ASSETS);
+function stepAsset(asset: Asset): Asset {
+  const price = asset.price * (1 + (Math.random() - 0.5) * 0.006);
+  return { ...asset, price, history: [...asset.history.slice(1), { value: price }] };
+}
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      setAssets((current) =>
-        current.map((asset) => {
-          const price = asset.price * (1 + (Math.random() - 0.5) * 0.006);
-          return {
-            ...asset,
-            price,
-            history: [...asset.history.slice(1), { value: price }],
-          };
-        }),
-      );
-    }, METRICS_INTERVAL_MS);
-    return () => clearInterval(id);
-  }, []);
+function CryptoWidgetImpl() {
+  const assets = useSimulatedSeries(INITIAL_ASSETS, stepAsset, METRICS_INTERVAL_MS);
 
   return (
     <WidgetShell title="Markets — Crypto">
@@ -101,3 +90,5 @@ export function CryptoWidget() {
     </WidgetShell>
   );
 }
+
+export const CryptoWidget = memo(CryptoWidgetImpl);

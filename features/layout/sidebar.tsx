@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { NAV_ITEMS } from "@/features/layout/nav-items";
+import { useMotionSafe } from "@/hooks/use-motion-safe";
 import { useSound } from "@/hooks/use-sound";
 import { useSystemStore } from "@/store/system-store";
 import { cn } from "@/lib/utils";
@@ -13,6 +14,7 @@ export function Sidebar() {
   const setView = useSystemStore((s) => s.setView);
   const playSound = useSound();
   const [expanded, setExpanded] = useState(false);
+  const motionSafe = useMotionSafe();
 
   return (
     <motion.nav
@@ -20,7 +22,7 @@ export function Sidebar() {
       className="glass-strong z-30 mx-3 my-3 hidden flex-col gap-1 self-start rounded-xl p-2 holo-border md:flex"
       initial={{ x: -60, opacity: 0 }}
       animate={{ x: 0, opacity: 1, width: expanded ? 192 : 56 }}
-      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: motionSafe ? 0.35 : 0, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={() => setExpanded(true)}
       onMouseLeave={() => setExpanded(false)}
       onFocusCapture={() => setExpanded(true)}
@@ -53,7 +55,11 @@ export function Sidebar() {
               <motion.span
                 layoutId="sidebar-active"
                 className="absolute inset-0 rounded-lg bg-kreku/10 shadow-[inset_2px_0_0_var(--kreku-accent)]"
-                transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                transition={
+                  motionSafe
+                    ? { type: "spring", stiffness: 400, damping: 32 }
+                    : { duration: 0 }
+                }
               />
             )}
             <Icon className="relative h-5 w-5 shrink-0" aria-hidden />

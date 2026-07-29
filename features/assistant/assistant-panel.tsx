@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Bot, X } from "lucide-react";
 import { AssistantChat } from "@/features/assistant/assistant-chat";
+import { useMotionSafe } from "@/hooks/use-motion-safe";
 import { useSound } from "@/hooks/use-sound";
 import { useAssistantStore } from "@/store/assistant-store";
 import { useSystemStore } from "@/store/system-store";
@@ -14,6 +15,7 @@ export function AssistantPanel() {
   const activeView = useSystemStore((s) => s.activeView);
   const status = useAssistantStore((s) => s.status);
   const playSound = useSound();
+  const motionSafe = useMotionSafe();
 
   // The dedicated assistant view already fills the screen — hide the floater.
   if (activeView === "assistant") return null;
@@ -29,7 +31,7 @@ export function AssistantPanel() {
             initial={{ opacity: 0, x: 40, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 40, scale: 0.95 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: motionSafe ? 0.35 : 0, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="mb-3 flex items-center gap-2">
               <Bot className="h-4 w-4 text-kreku" aria-hidden />
@@ -66,8 +68,9 @@ export function AssistantPanel() {
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.6 }}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.94 }}
+            transition={{ duration: motionSafe ? 0.2 : 0 }}
+            whileHover={motionSafe ? { scale: 1.08 } : undefined}
+            whileTap={motionSafe ? { scale: 0.94 } : undefined}
           >
             <Bot className="h-6 w-6" aria-hidden />
           </motion.button>

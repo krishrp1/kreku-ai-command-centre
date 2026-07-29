@@ -1,5 +1,6 @@
 "use client";
 
+import { memo, useMemo } from "react";
 import {
   Area,
   AreaChart,
@@ -21,12 +22,12 @@ import { CHART_COLORS } from "@/lib/constants";
 import { useMetricsStore } from "@/store/metrics-store";
 import { formatClock, formatPercent } from "@/utils/format";
 
-export function CpuWidget() {
+function CpuWidgetImpl() {
   const history = useMetricsStore((s) => s.history);
-  const data = history.map((sample) => ({
-    time: formatClock(sample.timestamp),
-    cpu: sample.cpu,
-  }));
+  const data = useMemo(
+    () => history.map((sample) => ({ time: formatClock(sample.timestamp), cpu: sample.cpu })),
+    [history],
+  );
   const current = history[history.length - 1].cpu;
 
   return (
@@ -62,3 +63,5 @@ export function CpuWidget() {
     </WidgetShell>
   );
 }
+
+export const CpuWidget = memo(CpuWidgetImpl);

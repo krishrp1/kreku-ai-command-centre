@@ -15,8 +15,19 @@ interface ChatMessage {
 }
 
 const MAX_MESSAGE_LENGTH = 4000;
-const MAX_TELEMETRY_LENGTH = 500;
 const MAX_HISTORY = 20;
+
+/**
+ * Telemetry is data, not instructions, but it's spliced straight into
+ * systemInstruction below — the highest-trust channel the model has. A
+ * length cap alone still lets an unauthenticated caller (this route has
+ * no auth) inject arbitrary text there, so the shape is pinned to exactly
+ * what formatTelemetry() in assistant-engine.ts produces. Anything that
+ * doesn't match is simulated data anyway, so falling back to "unavailable"
+ * loses nothing real.
+ */
+const TELEMETRY_PATTERN =
+  /^CPU \d{1,3}%, RAM \d{1,3}%, GPU \d{1,3}%, core temp \d{1,3}(?:\.\d+)?°C, network down \d{1,4} MB\/s, up \d{1,4} MB\/s, AI load \d{1,3}%, power \d{1,3}%$/;
 
 /**
  * Per-IP sliding-window limiter — this route is billable, and the site has
@@ -25,7 +36,7 @@ const MAX_HISTORY = 20;
  * so this route's own graceful degradation fires before Google's raw
  * quota error can surface.
  */
-const isRateLimited = createRateLimiter({ limit: 5, windowMs: 60_000 });
+const isRateLimited = createRateLimiter({ limit: 5, windowMs: 60_000, prefix: "kreku:chat" });
 
 function isValidMessage(value: unknown): value is ChatMessage {
   if (typeof value !== "object" || value === null) return false;
@@ -47,7 +58,7 @@ export async function POST(request: Request) {
   }
 
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  if (isRateLimited(ip)) {
+  if (await isRateLimited(ip)) {
     return NextResponse.json({ error: "rate limited" }, { status: 429 });
   }
 
@@ -69,8 +80,8 @@ export async function POST(request: Request) {
   }
 
   const telemetry =
-    typeof payload.telemetry === "string"
-      ? payload.telemetry.slice(0, MAX_TELEMETRY_LENGTH)
+    typeof payload.telemetry === "string" && TELEMETRY_PATTERN.test(payload.telemetry)
+      ? payload.telemetry
       : "unavailable";
 
   try {
