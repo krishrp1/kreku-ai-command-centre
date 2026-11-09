@@ -1,5 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
+import { getClientIp } from "@/lib/client-ip";
 import { createRateLimiter } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -57,7 +58,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ offline: true });
   }
 
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const ip = getClientIp(request);
   if (await isRateLimited(ip)) {
     return NextResponse.json({ error: "rate limited" }, { status: 429 });
   }
