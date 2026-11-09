@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getClientIp } from "@/lib/client-ip";
 import { createRateLimiter } from "@/lib/rate-limit";
 import { describeWeatherCode } from "@/lib/weather-codes";
 import type { WeatherData } from "@/types";
@@ -74,7 +75,7 @@ async function fetchForecast(lat: number, lon: number) {
  * surfacing an error to the widget.
  */
 export async function GET(request: Request) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const ip = getClientIp(request);
 
   if (await isRateLimited(ip)) {
     return NextResponse.json({ error: "rate limited" }, { status: 429 });

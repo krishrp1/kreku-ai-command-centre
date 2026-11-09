@@ -14,7 +14,7 @@ A futuristic AI operating system interface built as a flagship frontend portfoli
 - **Satellite view** — point-cloud globe with orbit paths and tracked assets
 - **Notification centre**, macOS-style dock with magnification, custom cursor, synthesised UI sounds (WebAudio, off by default)
 - **Accessibility** — reduced-motion (OS + in-app), high-contrast mode, ARIA labels, keyboard navigation, skip link
-- **Theming** — four accent themes (cyan/blue/purple/teal), adjustable glass blur
+- **Theming** — five accent themes (cyan/blue/purple/teal/red), adjustable glass blur
 
 ## Stack
 
